@@ -17,7 +17,13 @@
           <a class="nav-link" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/home">Advertisements</a>
+          <a class="nav-link" href="applyforcourse.php">Apply for course</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="coursenotice.php">Course Notice</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="courseassignment.php">Course Assignment</a>
         </li>
       </ul>
     </div>

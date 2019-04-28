@@ -2,7 +2,12 @@
   $DB_SERVER = "localhost";
   $DB_USER = "root";
   $DB_PASS = "";
-  $DB_NAME = "webservers";
+  $DB_NAME = "webservicesdatascience";
+
+  // define('DB_SERVER','localhost');
+  // define('DB_USER','root');
+  // define('DB_PASS' ,'');
+  // define('DB_NAME','onlinecourse');
 
   $connection = mysqli_connect($DB_SERVER,$DB_USER,$DB_PASS,$DB_NAME);
 

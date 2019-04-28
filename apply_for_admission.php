@@ -1,24 +1,29 @@
 <?php
-  include("config.php");
+include("config.php");
+if( isset($_POST["submit"]) )
+{
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $contact = $_POST['contact'];
+  $age = $_POST['age'];
+  $graduationyear = $_POST['graduationyear'];
+  $graduationfield = $_POST['graduationfield'];
+  $gatescore = $_POST['gatescore'];
 
-  if(isset($_POST["submit"])){
-    $username = $_POST['username'];
-    $password = md5($_POST["password"]);
-    $query = mysqli_query($connection, "SELECT * FROM Users WHERE Username='$username' and Password='$password'");
+  $sql = "INSERT INTO applicants(name, email, contact, age, graduationyear, graduationfield, gatescore ) VALUES ('$name','$email','$contact','$age','$graduationyear', '$graduationfield', 'gatescore' );";
+  $insert_data = mysqli_query($connection,$sql);
 
-    if($query->num_rows > 0){
-      session_start();
 
-      $_SESSION['username'] = $username;
-
-      $host = $_SERVER['HTTP_HOST'];
-      // echo "<script type='text/javascript'>alert('$host');</script>";
-      header("Location: http://{$host}/Web_Services_Data_Science");
-    }
-    else{
-
-    }
+  if($insert_data)
+  {
+    $_SESSION['msg']="Application Successfully sent !!";
   }
+
+  else
+  {
+      $_SESSION['msg']="Error : Not Enroll";
+  }
+}
 ?>
 
 <html>

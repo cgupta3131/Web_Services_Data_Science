@@ -23,7 +23,7 @@
           <a class="nav-link" href="coursenotice.php">Course Notice</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="courseassignment.php">Course Assignment</a>
+          <a class="nav-link" href="ViewCourseAssignments.php">Course Assignment</a>
         </li>
       </ul>
     </div>

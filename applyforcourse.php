@@ -9,7 +9,7 @@
     if($query->num_rows > 0){
       session_start();
 
-      $_SESSION['Username'] = $username;
+      $_SESSION['username'] = $username;
 
       $host = $_SERVER['HTTP_HOST'];
       // echo "<script type='text/javascript'>alert('$host');</script>";
@@ -41,14 +41,51 @@
 
   <form method="post">
   <div class="form-group">
-    <label>Username</label>
-    <input type="text" class="form-control" name="username" placeholder="Username" required>
+    <label>Name</label>
+    <input type="text" class="form-control" name="name" placeholder="Name" required>
   </div>
   <div class="form-group">
-    <label>Password</label>
-    <input type="password" class="form-control" name="password" placeholder="Password" required>
+    <label>Email ID</label>
+    <input type="email" class="form-control" name="email" placeholder="Email Address" required>
   </div>
-  <button type="submit" name="submit" class="btn btn-primary">Sign In</button>
+  <div class="form-group">
+    <label>Contact</label>
+    <input type="text" class="form-control" name="contact" placeholder="Contact" required>
+  </div>
+  <div class="form-group">
+    <label>Age</label>
+    <select class="form-control" name="age" required>
+      <?php
+        for($year = 10; $year <= 70; $year += 1){
+          echo "<option>$year</option>";
+        }
+      ?>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Graduation Degree</label><br>
+    <label>Year</label>
+    <select class="form-control" name="graduationyear" required>
+      <?php
+        for($year = 1990; $year <= date("Y"); $year += 1){
+          echo "<option>$year</option>";
+        }
+      ?>
+    </select>
+
+    <label>Field</label>
+    <select class="form-control" name="graduationfield" required>
+      <option>CSE</option>
+      <option>ECE</option>
+      <option>EE</option>
+      <option>Mathematics</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>GATE Score</label>
+    <input type="text" class="form-control" name="gatescore" placeholder="GATE Score" required>
+  </div>
+  <button type="submit" name="submit" class="btn btn-primary">Apply</button>
 </form>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -3,6 +3,13 @@
 
   include("config.php");
 
+
+  if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
+      $host = $_SERVER['HTTP_HOST'];
+      header("Location: http://{$host}/Web_Services_Data_Science");
+  }
+  
+
   require_once 'dompdf/lib/html5lib/Parser.php';
   require_once 'dompdf/lib/php-font-lib/src/FontLib/Autoloader.php';
   require_once 'dompdf/lib/php-svg-lib/src/autoload.php';

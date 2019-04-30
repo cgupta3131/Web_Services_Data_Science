@@ -32,8 +32,7 @@ if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
       $AssignmentID = $_POST['AssignmentID'];
       $Details = $_POST['Details'];
       $Deadline = $_POST['Deadline'];
-      // $CourseID = $_SESSION['CourseID'];
-      $CourseID = 'CS243';
+      $CourseID = $_SESSION['CourseID'];
 
       $IsUpload = True;
 

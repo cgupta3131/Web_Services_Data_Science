@@ -1,32 +1,56 @@
 <?php
+session_start();
+
 include("config.php");
+
+if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
+    $host = $_SERVER['HTTP_HOST'];
+    header("Location: http://{$host}/Web_Services_Data_Science");
+}
+
 if( isset($_POST["submit"]) )
 {
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $contact = $_POST['contact'];
-  $age = $_POST['age'];
-  $graduationyear = $_POST['graduationyear'];
-  $graduationfield = $_POST['graduationfield'];
-  $gatescore = $_POST['gatescore'];
-  $gatescore_int = number_format($gatescore);
 
-  $sql = "INSERT INTO applicant(name, email, contact, age, graduationyear, graduationfield, gatescore ) VALUES ('$name','$email','$contact','$age','$graduationyear', '$graduationfield', 'gatescore_int' );";
-  $insert_data = mysqli_query($connection,$sql);
+  $_SESSION['username'] = "cgupta3131@gmail.com";
+  $username = $_SESSION['username'];
 
+  $old_password = $_POST['old_password'];
+  $new_password = $_POST['new_password'];
+  $confirm_password = $_POST['confirm_password'];
+  $hash_old = md5($old_password);
 
-  if($insert_data)
+  //echo $new_password."   ".$confirm_password."<br>";
+  $retrieve_passwd=mysqli_query($con,"select * from Users WHERE `Username` = '$username' ");
+
+  while($row = mysqli_fetch_array($retrieve_passwd))
   {
-    $_SESSION['msg']="Application Successfully sent !!";
-  }
+      $passwd = $row['Password'];
+      //echo $passwd . "<br>";
+      //echo $hash_old;
 
-  else
-  {
-      $_SESSION['msg']="Error : Not Enroll";
+      if($hash_old == $passwd)
+      {
+          if($new_password == $confirm_password)
+          {
+              $hash_new = md5($new_password);
+              $sql = "UPDATE Users SET `Password` = '$hash_new' WHERE `Username` = '$username';";
+              $update_data = mysqli_query($con,$sql);
+          }
+          else
+          {
+            $message = "Two passwords don't match";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+          }
+      }
+
+      else
+      {
+        $message = "Please Input Correct Password";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+      }
   }
 }
 ?>
-
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -43,7 +67,6 @@ if( isset($_POST["submit"]) )
         </li>
 
         <?php
-        if(isset($_SESSION['login']) && $_SESSION['login'] == 1){
             if($_SESSION['Designation'] == 'Student'){
                 echo "
                 <li class='nav-item'>
@@ -54,13 +77,13 @@ if( isset($_POST["submit"]) )
                 </li>
                 ";
             }
+        ?>
 
+        <li class="nav-item">
+          <a class="nav-link" href="change_password.php">Change Password</a>
+        </li>
 
-        echo "<li class='nav-item'>
-          <a class='nav-link' href='change_password.php'>Change Password</a>
-        </li>";
-
-
+        <?php
             if($_SESSION['Designation'] == 'Faculty'){
                 echo "
                 <li class='nav-item'>
@@ -78,7 +101,10 @@ if( isset($_POST["submit"]) )
                 </li>
                 ";
             }
+        ?>
 
+
+        <?php
             if($_SESSION['Designation'] == 'Staff'){
                 echo "
                 <li class='nav-item'>
@@ -86,70 +112,35 @@ if( isset($_POST["submit"]) )
                 </li>
                 ";
             }
-        }
-        else{
-            echo "<li class='nav-item'>
-              <a class='nav-link' href='admission.php'>Admission</a>
-            </li>";
-        }
         ?>
 
       </ul>
     </div>
   </nav>
 
-  <div class='fluid-container'>
-      <div class='row' style='padding: 50px 0px 0px 0px;'>
-      <div class='col-lg-2'></div>
-          <div class='col'>
-  <form method="post">
-  <div class="form-group">
-    <label>Name</label>
-    <input type="text" class="form-control" name="name" placeholder="Name" required>
-  </div>
-  <div class="form-group">
-    <label>Email ID</label>
-    <input type="email" class="form-control" name="email" placeholder="Email Address" required>
-  </div>
-  <div class="form-group">
-    <label>Contact</label>
-    <input type="text" class="form-control" name="contact" placeholder="Contact" required>
-  </div>
-  <div class="form-group">
-    <label>Age</label>
-    <select class="form-control" name="age" required>
-      <?php
-        for($year = 18; $year <= 70; $year += 1){
-          echo "<option>$year</option>";
-        }
-      ?>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>Graduation Degree</label><br>
-    <label>Year</label>
-    <select class="form-control" name="graduationyear" required>
-      <?php
-        for($year = 1990; $year <= date("Y"); $year += 1){
-          echo "<option>$year</option>";
-        }
-      ?>
-    </select>
+<div class='fluid-container'>
+    <div class='row' style='padding: 50px 0px 0px 0px;'>
+    <div class='col-lg-2'></div>
+        <div class='col'>
+<form name="dept" method="post" enctype="multipart/form-data">
+<div class="form-group">
+    <label for="studentregno">Old Password</label>
+    <input type="password" class="form-control" id="course_name" name="old_password"/>
+</div>
 
-    <label>Field</label>
-    <select class="form-control" name="graduationfield" required>
-      <option>CSE</option>
-      <option>ECE</option>
-      <option>EE</option>
-      <option>Mathematics</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>GATE Score</label>
-    <input type="text" class="form-control" name="gatescore" placeholder="GATE Score" required>
-  </div>
-  <button type="submit" name="submit" class="btn btn-primary">Apply</button>
+<div class="form-group">
+    <label for="studentregno">New Password</label>
+    <input type="password" class="form-control" id="course_id" name="new_password"/>
+</div>
+
+<div class="form-group">
+    <label for="studentregno">Confirm New Password</label>
+    <input type="password" class="form-control" id="about_course" name="confirm_password"/>
+</div>
+
+<button type="submit" name="submit" id="submit" class="btn btn-primary">Change Password</button>
 </form>
+
 </div>
 <div class='col-lg-2'></div>
 </div>

@@ -15,8 +15,7 @@
   Dompdf\Autoloader::register();
   use Dompdf\Dompdf;
 
-  // $CourseID = $_SESSION['CourseID'];
-  $CourseID = 'CS243';
+  $CourseID = $_SESSION['CourseID'];
 
   if(isset($_POST["submit"])){
       foreach($_POST['Grade'] as $key => $value) {

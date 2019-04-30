@@ -18,6 +18,7 @@ session_start();
         </li>
 
         <?php
+        if(isset($_SESSION['login']) && $_SESSION['login'] == 1){
             if($_SESSION['Designation'] == 'Student'){
                 echo "
                 <li class='nav-item'>
@@ -28,13 +29,13 @@ session_start();
                 </li>
                 ";
             }
-        ?>
 
-        <li class="nav-item">
-          <a class="nav-link" href="./Students/change_password.php">Change Password</a>
-        </li>
 
-        <?php
+        echo "<li class='nav-item'>
+          <a class='nav-link' href='change_password.php'>Change Password</a>
+        </li>";
+
+
             if($_SESSION['Designation'] == 'Faculty'){
                 echo "
                 <li class='nav-item'>
@@ -52,10 +53,7 @@ session_start();
                 </li>
                 ";
             }
-        ?>
 
-
-        <?php
             if($_SESSION['Designation'] == 'Staff'){
                 echo "
                 <li class='nav-item'>
@@ -63,6 +61,12 @@ session_start();
                 </li>
                 ";
             }
+        }
+        else{
+            echo "<li class='nav-item'>
+              <a class='nav-link' href='admission.php'>Admission</a>
+            </li>";
+        }
         ?>
 
       </ul>
@@ -70,7 +74,7 @@ session_start();
   </nav>
 
 <div class='container-fluid'>
-    <div class='row'>
+    <div class='row' style='padding: 50px 0px 0px 0px;'>
         <div class='col-lg-2'></div>
         <div class='col'>
 
@@ -118,7 +122,7 @@ session_start();
 
 
 <div class='container-fluid'>
-    <div class='row'>
+    <div class='row' style='padding: 50px 0px 0px 0px;'>
         <div class='col-lg-1'></div>
         <div class='col'>
 <p class='form-control-plaintext'>It’s been said that Data Scientist is the“sexiest job title of the 21st century.” Why is it such a demanded position these days? The short answer is that over the last decade there’s been a massive explosion in both the data generated and retained by companies, as well as you and me. Sometimes we call this “big data,” and like a pile of lumber we’d like to build something with it. Data scientists are the people who make sense out of all this data and figure out just what can be done with it.</p>

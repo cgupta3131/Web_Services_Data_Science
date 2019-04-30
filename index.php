@@ -16,33 +16,55 @@ session_start();
         <li class="nav-item">
           <a class="nav-link" href="index.php">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./Students/select_course.php">Apply for course</a>
-        </li>
+
+        <?php
+            if($_SESSION['Designation'] == 'Student'){
+                echo "
+                <li class='nav-item'>
+                  <a class='nav-link' href='./Students/select_course.php'>Apply for course</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='ViewEnrolledCourses.php'>Enrolled Courses</a>
+                </li>
+                ";
+            }
+        ?>
+
         <li class="nav-item">
           <a class="nav-link" href="./Students/change_password.php">Change Password</a>
         </li>
 
+        <?php
+            if($_SESSION['Designation'] == 'Faculty'){
+                echo "
+                <li class='nav-item'>
+                  <a class='nav-link' href='./Faculty/add_course.php'>Add New Course</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='./Faculty/view_course.php'>My Courses</a>
+                </li>
+
+                <li class='nav-item'>
+                  <a class='nav-link' href='./Faculty/request_course.php'>Student Requests</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='./Faculty/students_courses.php'>My Students</a>
+                </li>
+                ";
+            }
+        ?>
 
 
-        <li class="nav-item">
-          <a class="nav-link" href="./Faculty/add_course.php">Add New Course</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./Faculty/view_course.php">My Courses</a>
-        </li>
+        <?php
+            if($_SESSION['Designation'] == 'Staff'){
+                echo "
+                <li class='nav-item'>
+                  <a class='nav-link' href='./Staff/all_applicants.php'>View Applicants</a>
+                </li>
+                ";
+            }
+        ?>
 
-        <li class="nav-item">
-          <a class="nav-link" href="./Faculty/request_course.php">Student Requests</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./Faculty/students_courses.php">My Students</a>
-        </li>
-
-
-        <li class="nav-item">
-          <a class="nav-link" href="./Staff/all_applicants.php">View Applicants</a>
-        </li>
       </ul>
     </div>
   </nav>

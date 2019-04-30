@@ -3,6 +3,7 @@ session_start();
 include("config.php");
 
 $_SESSION['CourseID'] = $_GET['CourseID'];
+$CourseID = $_SESSION['CourseID'];
 $query = mysqli_query($connection, "SELECT * FROM courses WHERE course_id = '$CourseID'");
 if($row = mysqli_fetch_assoc($query)){
     $_SESSION['CourseName'] = $row['course_name'];
@@ -23,24 +24,37 @@ if($row = mysqli_fetch_assoc($query)){
         <li class="nav-item">
           <a class="nav-link" href="index.php">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./Students/select_course.php">Apply for course</a>
-        </li>
+        <?php
+        if($_SESSION['Designation'] == 'Student'){
+            echo "
+            <li class='nav-item'>
+              <a class='nav-link' href='ViewEnrolledCourses.php'>Enrolled Courses</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='DownloadGradeCard.php'>Download Grade Card</a>
+            </li>
+            ";
+        }
+        else if($_SESSION['Designation'] == 'Faculty'){
+            echo "
+            <li class='nav-item'>
+              <a class='nav-link' href='./Faculty/view_course.php'>My Courses</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='EditCourseGradeCard.php'>Edit Course Grade Card</a>
+            </li>
+            ";
+        }
+        ?>
+
         <li class="nav-item">
           <a class="nav-link" href="coursenotice.php">Course Notice</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="ViewCourseAssignments.php">Course Assignment</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="EditCourseGradeCard.php">Edit Course Grade Card</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="DownloadGradeCard.php">Download Grade Card</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="ViewEnrolledCourses.php">Enrolled Courses</a>
-        </li>
+
+
       </ul>
     </div>
   </nav>

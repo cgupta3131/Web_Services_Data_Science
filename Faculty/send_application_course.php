@@ -8,8 +8,6 @@ if( isset($_POST["submit"]) )
 {
 	$last_date = $_POST['last_date'];
 	$today_date = date("Y-m-d");
-	echo date("Y-m-d")."<br>";
-	echo $last_date;
 
 	if($last_date <= $today_date)
 	{

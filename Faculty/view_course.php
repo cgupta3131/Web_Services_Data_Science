@@ -3,6 +3,7 @@ include("includes/config.php");
 session_start();
 
 ?>
+
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
@@ -39,6 +40,7 @@ session_start();
                                             <th>Course ID</th>
                                             <th>Semester</th>
                                             <th>Course Name</th>
+                                            <th> Application Status </th>
                                              <th>Action</th>
                                         </tr>
                                     </thead>
@@ -59,6 +61,7 @@ session_start();
                                             <td><?php echo htmlentities($row['course_id']);?></td>
                                             <td><?php echo htmlentities($row['start_semester']);?></td>
                                             <td><?php echo htmlentities($row['course_name']);?></td>
+                                            <td><?php echo htmlentities($row['Application_Status']);?></td>
                                             <td>
 
                                             <a href="view_individual_course.php?idCourse=<?php echo $row['course_id']?>">

@@ -4,7 +4,6 @@ session_start();
 
 if( isset($_POST["submit"]) )
 {
-
   //Remove this line when getting the data
   $_SESSION['username'] = "chirag";
 	$department = $_POST['department'];
@@ -13,9 +12,10 @@ if( isset($_POST["submit"]) )
 	$about_course = $_POST['about_course'];
 	$start_semester = $_POST['start_semester'];
   $username = $_SESSION['username'];
+  $last_date = $_POST['last_date'];
 
-	$sql = "INSERT INTO courses(department, course_name, course_id, about_course, start_semester, username) VALUES ('$department','$course_name','$course_id','$about_course','$start_semester', 
-    '$username' );";
+	$sql = "INSERT INTO courses(department, course_name, course_id, about_course, start_semester, username,last_date,seats_remaining) VALUES ('$department','$course_name','$course_id','$about_course','$start_semester', '$username', '$last_date','20' );";
+
 	$insert_data = mysqli_query($con,$sql);
 
 	if($insert_data)
@@ -28,7 +28,6 @@ if( isset($_POST["submit"]) )
   		$_SESSION['msg']="Error : Not Enroll";
 	}
 }
-
 
 ?>
 
@@ -97,6 +96,11 @@ if( isset($_POST["submit"]) )
 			  <option value="Fall">Fall</option>
 		</select>
   	</div>
+
+    <div class="form-group">
+      <label for="studentregno">Last Date for Application</label>
+      <input type="date" class="form-control" id="last_date" name="last_date"/>
+    </div>
 
    	<button type="submit" name="submit" id="submit" class="btn btn-default">Add Course</button>
 

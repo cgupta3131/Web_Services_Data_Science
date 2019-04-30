@@ -20,7 +20,28 @@ session_start();
           <a class="nav-link" href="./Students/select_course.php">Apply for course</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="ViewEnrolledCourses.php">Enrolled Courses</a>
+          <a class="nav-link" href="./Students/change_password.php">Change Password</a>
+        </li>
+
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="./Faculty/add_course.php">Add New Course</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./Faculty/view_course.php">My Courses</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="./Faculty/request_course.php">Student Requests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./Faculty/students_courses.php">My Students</a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="./Staff/all_applicants.php">View Applicants</a>
         </li>
       </ul>
     </div>

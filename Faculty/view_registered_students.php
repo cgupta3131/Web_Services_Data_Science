@@ -40,7 +40,6 @@ $_SESSION['CourseID'] = $_GET['idCourse'];
                     <tr>
                         <td><?php echo $cnt;?></td>
                         <td><?php echo htmlentities($row['Username']);?></td>
-                        <td><?php echo htmlentities($row['Grade']);?></td>
                     
                         <?php
                             $username_student = $row['Username'];
@@ -49,7 +48,12 @@ $_SESSION['CourseID'] = $_GET['idCourse'];
                             while($row2 = mysqli_fetch_array($sql2))
                             { ?>
                                 <td><?php echo htmlentities($row2['name']);?></td>
-                            }
+
+                             <?php   
+                            } ?>
+
+                        <td><?php echo htmlentities($row['Grade']);?></td>
+                        
                     </tr>
                     <?php 
                     $cnt++;

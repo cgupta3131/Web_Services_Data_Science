@@ -4,33 +4,6 @@ session_start();
 $_SESSION['username'] = "chirag";
 $username = $_SESSION['username'];
 
-$sql=mysqli_query($con,"select * from courses WHERE `username` = '$username' AND `Application_Status` = 'Open' OR `Application_Status` = 'Deadline Passed' ");
-
-while($row = mysqli_fetch_array($sql))
-{
-	$courseId = $row['course_id'];
-	if( isset($_POST[$courseId]) )
-	{
-		echo "Chirag";
-		$sql2=mysqli_query($con,"select * from RequestCourse WHERE `courseID` = '$courseId' ORDER BY `gateScore` DESC");
-		$j = 0;
-		while($row2 = mysqli_fetch_array($sql2))
-		{
-			if($j > 20)
-				break;
-			$j += 1;
-			$student_username = $row2['UserName'];
-			$sql = "INSERT INTO EnrolledStudents(CourseID, Username, Grade) 
-					VALUES ('$courseId','$student_username','0' );";
-
-			$insert_data = mysqli_query($con,$sql);
-		}
-
-		$sql3 = "UPDATE courses SET `Application_Status` = 'Completed' WHERE `course_id` = '$courseId';";
-        $update_data = mysqli_query($con,$sql3);
-	}
-}
-
 
 ?>
 
@@ -40,7 +13,7 @@ while($row = mysqli_fetch_array($sql))
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Request Courses</title>
+    <title>My Students</title>
 </head>
 
 <body>
@@ -81,10 +54,7 @@ while($row = mysqli_fetch_array($sql))
                         <a href="view_registered_students.php?idCourse=<?php echo $row['course_id']?>">
                         <button class="btn btn-primary"><i class="fa fa-edit "></i>View Students</button> </a>     
 
-                        <form method="post">
-                        <button type="submit" name="<?php echo $row['course_id']?>" class="btn btn-default">Register Students</button>
-                    	</form>
-
+                        
                         </td>
                     </tr>
                     <?php 

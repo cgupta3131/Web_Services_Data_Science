@@ -14,7 +14,7 @@
     $confirmpassword = md5($_POST["confirmpassword"]);
     $designation = $_POST['designation'];
 
-    
+
     if(strlen($password) < 6)
       $PasswordEmpty = "*Passsword must be minimum of 6 characters";
     else if($password != $confirmpassword)
@@ -37,12 +37,12 @@
 
       else
       {
-        $query = mysqli_query($connection, "INSERT into Users(Username, Password, FullName, Designation) 
+        $query = mysqli_query($connection, "INSERT into Users(Username, Password, FullName, Designation)
                       values('$username', '$password', '$fullname', '$designation')");
       }
-      
+
       //$host = $_SERVER['HTTP_HOST'];
-      //header("Location: http://{$host}Web_Services_Data_Science"); 
+      //header("Location: http://{$host}Web_Services_Data_Science");
     }
   }
 ?>
@@ -110,6 +110,9 @@
         else{
             echo "<li class='nav-item'>
               <a class='nav-link' href='admission.php'>Admission</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='HomeNoticesDisplay.php'>Notice Board</a>
             </li>";
         }
         ?>
@@ -147,7 +150,7 @@
     <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password" required>
     <span class="error"><?php echo $ConfirmEmpty; ?></span>
   </div>
-  
+
   <div class="form-group">
       <label for="studentregno">Semester</label>
       <select name="designation" class='form-control'>

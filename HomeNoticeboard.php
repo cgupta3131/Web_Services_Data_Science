@@ -1,53 +1,23 @@
 <?php
-session_start();
+  session_start();
 
-include("config.php");
-$EqualPassword = "";
-$CorrectPassword = "";
-if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
-    $host = $_SERVER['HTTP_HOST'];
-    header("Location: http://{$host}/Web_Services_Data_Science");
-}
+  include("config.php");
 
-if( isset($_POST["submit"]) )
-{
-
-  $_SESSION['username'] = "cgupta3131@gmail.com";
-  $username = $_SESSION['username'];
-
-  $old_password = $_POST['old_password'];
-  $new_password = $_POST['new_password'];
-  $confirm_password = $_POST['confirm_password'];
-  $hash_old = md5($old_password);
-
-  //echo $new_password."   ".$confirm_password."<br>";
-  $retrieve_passwd=mysqli_query($connection,"select * from Users WHERE `Username` = '$username' ");
-
-  while($row = mysqli_fetch_array($retrieve_passwd))
-  {
-      $passwd = $row['Password'];
-
-      if($hash_old == $passwd)
-      {
-          if($new_password == $confirm_password)
-          {
-              $hash_new = md5($new_password);
-              $sql = "UPDATE Users SET `Password` = '$hash_new' WHERE `Username` = '$username';";
-              $update_data = mysqli_query($connection,$sql);
-          }
-          else
-          {
-            $EqualPassword = "Both Passwords don't match";
-          }
-      }
-
-      else
-      {
-        $CorrectPassword = "Please Input Correct Password";
-      }
+  if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
+      $host = $_SERVER['HTTP_HOST'];
+      header("Location: http://{$host}/Web_Services_Data_Science");
   }
-}
+
+  // $CourseID = $_SESSION['CourseID'];
+
+  if(isset($_POST["submit"])){
+    $NoticeHead = $_POST['NoticeHead'];
+    $NoticeBody = ($_POST["NoticeBody"]);
+    $Username = $_SESSION['Username'];
+    $query = mysqli_query($connection, "INSERT into HomeNotices(Username, NoticeHead, NoticeBody) values('$Username', '$NoticeHead', '$NoticeBody')");
+  }
 ?>
+
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -60,7 +30,7 @@ if( isset($_POST["submit"]) )
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="index.php">Home</a>
+          <a class="nav-link" href="./index.php">Home</a>
         </li>
 
         <?php
@@ -70,14 +40,14 @@ if( isset($_POST["submit"]) )
                   <a class='nav-link' href='./Students/select_course.php'>Apply for course</a>
                 </li>
                 <li class='nav-item'>
-                  <a class='nav-link' href='ViewEnrolledCourses.php'>Enrolled Courses</a>
+                  <a class='nav-link' href='./ViewEnrolledCourses.php'>Enrolled Courses</a>
                 </li>
                 ";
             }
         ?>
 
         <li class="nav-item">
-          <a class="nav-link" href="change_password.php">Change Password</a>
+          <a class="nav-link" href="./change_password.php">Change Password</a>
         </li>
 
         <?php
@@ -118,30 +88,48 @@ if( isset($_POST["submit"]) )
     </div>
   </nav>
 
-<div class='fluid-container'>
-    <div class='row' style='padding: 50px 0px 0px 0px;'>
-    <div class='col-lg-2'></div>
-        <div class='col'>
-<form name="dept" method="post" enctype="multipart/form-data">
-<div class="form-group">
-    <label for="studentregno">Old Password</label>
-    <input type="password" class="form-control" id="course_name" name="old_password" required="true" />
-    <span class="error" style="color:red"> <?php echo $CorrectPassword; ?></span>
-</div>
 
-<div class="form-group">
-    <label for="studentregno">New Password</label>
-    <input type="password" class="form-control" id="course_id" name="new_password" required="true" />
-</div>
+  <div class='fluid-container'>
+      <div class='row' style='padding: 50px 0px 0px 0px;'>
+      <div class='col-lg-2'></div>
+          <div class='col'>
 
-<div class="form-group">
-    <label for="studentregno">Confirm New Password</label>
-    <input type="password" class="form-control" id="about_course" name="confirm_password" required="true" />
-    <span class="error" style="color:red"> <?php echo $EqualPassword; ?></span>
-</div>
+  <?php
 
-<button type="submit" name="submit" id="submit" class="btn btn-primary">Change Password</button>
-</form>
+    include("config.php");
+
+    $query = mysqli_query($connection, "SELECT * FROM HomeNotices");
+
+    $bgcolor = array('bg-success', 'bg-danger', 'bg-warning', 'bg-info');
+
+    $i = 0;
+    while($row = mysqli_fetch_assoc($query)){
+        echo "<div class='card text-white {$bgcolor[$i%4]} mb-3 pull-left col-height col-middle col-xs-5' style='max-width: 100rem;'>
+                <h5 class='card-header'>{$row['NoticeHead']}</h5>
+                  <div class='card-body'>
+                    <p class='card-text'>{$row['NoticeBody']}</p>
+                  </div>
+              </div>";
+        $i += 1;
+    }
+
+  ?>
+
+  <?php
+    if($_SESSION['Designation'] == 'Staff'){
+        echo "
+        <form method='post'>
+        <div class='form-group'>
+          <input type='text' class='form-control' name='NoticeHead' placeholder='Notice Heading' required>
+        </div>
+        <div class='form-group'>
+          <textarea rows='5' class='form-control' name='NoticeBody' placeholder='Notice Body' required></textarea>
+        </div>
+        <button type='submit' name='submit' class='btn btn-primary'>Add notice</button>
+      </form>
+        ";
+    }
+  ?>
 
 </div>
 <div class='col-lg-2'></div>

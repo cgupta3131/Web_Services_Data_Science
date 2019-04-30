@@ -22,6 +22,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -81,6 +82,11 @@
     }
 ?>
 
+</div>
+<div class='col-lg-2'></div>
+</div>
+</div>
+
   <ul class="cards">
   <?php
 
@@ -90,13 +96,16 @@
 
   $query = mysqli_query($connection, "SELECT * FROM CourseAssignments WHERE CourseID='$CourseID'");
 
+
   while($row = mysqli_fetch_assoc($query)){
+      $AssignmentID = $row['AssignmentID'];
       echo "<li class='cards__item'>
         <div class = 'card'>
         <div class='card__content'>
           <div class='card__title'>{$row['AssignmentID']}</div>
           <div class='card__subtitle'>Deadline: {$row['Deadline']}</div>
-          <p class='card__text'>{$row['Details']}</p>
+          <p class='card__text'>{$row['Details']}<br>
+          <a href='media/courses/$CourseID/assignments/$AssignmentID/'>Download from here</a></p>
         </div>
         </div>
       </li>";
@@ -105,11 +114,6 @@
 
   ?>
   </ul>
-
-</div>
-<div class='col-lg-2'></div>
-</div>
-</div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

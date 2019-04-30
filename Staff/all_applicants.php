@@ -48,7 +48,7 @@ if(isset($_POST["submit"]))
     	$update_data = mysqli_query($con,$sql);
 
     	//Registering Student
-    	$sql = "INSERT INTO Users(Username, Password, RollNumber, FullName, Designation) 
+    	$sql = "INSERT INTO Users(Username, Password, RollNumber, FullName, Designation)
                     VALUES ('$email_id','$password','$RollNumber','$full_name', 'Student' );";
     	$insert_data = mysqli_query($con,$sql);
     }
@@ -172,6 +172,9 @@ function randomPassword() {
                   echo "
                   <li class='nav-item'>
                     <a class='nav-link' href='./../Staff/all_applicants.php'>View Applicants</a>
+                  </li>
+                  <li class='nav-item'>
+                    <a class='nav-link' href='./../HomeNoticeboard.php'>Notice Board</a>
                   </li>
                   ";
               }

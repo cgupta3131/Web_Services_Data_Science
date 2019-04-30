@@ -3,6 +3,11 @@
 
   include("config.php");
 
+  if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
+      $host = $_SERVER['HTTP_HOST'];
+      header("Location: http://{$host}/Web_Services_Data_Science");
+  }
+  
   // $CourseID = $_SESSION['CourseID'];
 
   if(isset($_POST["submit"])){

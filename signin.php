@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include("config.php");
 
   if(isset($_POST["submit"])){
@@ -7,11 +8,18 @@
     $query = mysqli_query($connection, "SELECT * FROM Users WHERE Username='$username' and Password='$password'");
 
     if($query->num_rows > 0){
-      session_start();
+
+      if($row = mysqli_fetch_assoc($query)){
+          $FullName = $row['FullName'];
+          $Designation = $row['Designation'];
+      }
 
       $_SESSION['Username'] = $username;
+      $_SESSION['FullName'] = $FullName;
+      $_SESSION['Designation'] = $Designation;
 
       $host = $_SERVER['HTTP_HOST'];
+      $_SESSION['login'] = 1;
       // echo "<script type='text/javascript'>alert('$host');</script>";
       header("Location: http://{$host}/Web_Services_Data_Science");
     }

@@ -17,7 +17,7 @@ session_start();
           <a class="nav-link" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="applyforcourse.php">Apply for course</a>
+          <a class="nav-link" href="./Students/select_course.php">Apply for course</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="coursenotice.php">Course Notice</a>

@@ -7,6 +7,12 @@ if(isset($_POST["logout"])){
   header("Location: ./../index.php");
 }
 
+if(isset($_POST["publish_results"]))
+{
+    $sql = "UPDATE Publish_results SET `IsOpen` = 'Yes' ";
+    $update_data = mysqli_query($con,$sql);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +56,7 @@ if(isset($_POST["logout"])){
                                             <th>#</th>
                                             <th>Student Name</th>
                                             <th>Student Email</th>
-                                            <th>Application Number</th>
+                                            <th>Roll Number</th>
                                              <th>Action</th>
                                         </tr>
                                     </thead>
@@ -63,13 +69,20 @@ if(isset($_POST["logout"])){
                                     $cnt=1;
                                     while($row = mysqli_fetch_array($sql))
                                     {
-                                    ?>
+                                      $email = $row['email'];
+                                      $sql2 = mysqli_query($con,"select * from Users where `Username` = '$email' ");
 
+                                      while($row2 = mysqli_fetch_array($sql2))
+                                      {
+                                          $roll_number = $row2['RollNumber'];
+                                      }
+
+                                    ?>
                                         <tr>
                                             <td><?php echo $cnt;?></td>
                                             <td><?php echo htmlentities($row['name']);?></td>
-                                            <td><?php echo htmlentities($row['email']);?></td>
-                                            <td><?php echo htmlentities($row['application_number']);?></td>
+                                            <td><?php echo htmlentities($email);?></td>
+                                            <td><?php echo htmlentities($roll_number);?></td>
                                             <td>
 
                                             <a href="student_gradecard.php?EmailID=<?php echo $row['email']?>">
@@ -81,7 +94,8 @@ if(isset($_POST["logout"])){
                                         $cnt++;
 
                                     } ?>
-
+                                    
+                                    
 
                                     </tbody>
 
@@ -94,11 +108,15 @@ if(isset($_POST["logout"])){
             </div>
 
 
-
-
-
         </div>
     </div>
+    
+    <br> <br>
+    <form method="post">
+        <p align="center">
+        <button type="submit" name="publish_results" class="btn btn-primary">Publish Results</button>
+      </p>
+    </form>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

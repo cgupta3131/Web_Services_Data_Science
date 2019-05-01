@@ -117,9 +117,6 @@ if(isset($_POST["logout"]))
 
 
 
-
-
-
 ?>
 
 <html>

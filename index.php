@@ -59,13 +59,23 @@ session_start();
                 <li class='nav-item'>
                   <a class='nav-link' href='./Staff/all_applicants.php'>View Applicants</a>
                 </li>
+
+                <li class='nav-item'>
+                  <a class='nav-link' href='./Staff/publish_advertisement.php'>Publish Advertisement</a>
+                </li>
                 ";
             }
         }
-        else{
+        else
+        {
             echo "<li class='nav-item'>
               <a class='nav-link' href='admission.php'>Admission</a>
-            </li>";
+            </li>
+            
+            <li class='nav-item'>
+                  <a class='nav-link' href='ViewAdvertisements.php'>Advertisements</a>
+                </li>
+            ";
         }
         ?>
 

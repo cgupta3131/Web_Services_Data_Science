@@ -1,11 +1,22 @@
 <?php
 session_start();
 
-include("config.php");
+include("includes/config.php");
 
-if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
+if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1))
+{
     $host = $_SERVER['HTTP_HOST'];
     header("Location: http://{$host}/Web_Services_Data_Science");
+}
+
+if(isset($_POST["submit"]))
+{
+  $Header = $_POST['header'];
+  $Details = $_POST['Details'];
+  $Deadline = $_POST['Deadline'];
+
+  $query = mysqli_query($con, "INSERT into Advertisements(header, details, deadline) 
+  			values('$Header', '$Details', '$Deadline')");
 }
 
 ?>
@@ -16,7 +27,7 @@ if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
 </head>
 
 <body>
-  <?php include('top_nav.php'); ?>
+  <?php include('../top_nav.php'); ?>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse">
@@ -65,73 +76,25 @@ if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
       <div class='col-lg-2'></div>
           <div class='col'>
 
-  <?php
-    include("config.php");
-
-    // $CourseID = $_SESSION['CourseID'];
-
-    if(isset($_POST["submit"])){
-      $AssignmentID = $_POST['AssignmentID'];
-      $Details = $_POST['Details'];
-      $Deadline = $_POST['Deadline'];
-      $CourseID = $_SESSION['CourseID'];
-
-      $IsUpload = True;
-
-      // $target_dir = "/opt/lampp/htdocs/Web_Services_Data_Science/media/courses/$CourseID/assignments/$AssignmentID/";
-      $target_course_dir = "/opt/lampp/htdocs/Web_Services_Data_Science/media/courses/$CourseID";
-      $target_dir = "/opt/lampp/htdocs/Web_Services_Data_Science/media/courses/$CourseID/assignments/$AssignmentID/";
-      $target_file = $target_dir . basename($_FILES["AssignmentFile"]["name"]);
-      // echo "<script type='text/javascript'>alert('$target_file');</script>";
-
-      if (file_exists($target_file)) {
-          echo "Sorry, file already exists.";
-          $IsUpload = False;
-      }
-
-      if($IsUpload == True){
-        if(!is_dir("$target_course_dir")) {
-          mkdir("$target_course_dir");
-        }
-
-        if(!is_dir("$target_course_dir/assignments")) {
-          mkdir("$target_course_dir/assignments");
-        }
-
-        if(!is_dir("$target_dir")) {
-          mkdir("$target_dir");
-        }
-
-        if (move_uploaded_file($_FILES["AssignmentFile"]["tmp_name"], $target_file)) {
-          echo "The file ". basename( $_FILES["AssignmentFile"]["name"]). " has been uploaded.";
-          $query = mysqli_query($connection, "INSERT into CourseAssignments(CourseID, AssignmentID, Details, Deadline, AssignmentFile) values('$CourseID', '$AssignmentID', '$Details', '$Deadline', '$target_file')");
-        } else {
-          echo "Sorry, there was an error uploading your file.";
-        }
-      }
-
-
-    }
-  ?>
 
   <form method="post" enctype="multipart/form-data">
   <div class="form-group">
-    <label>Assignment ID</label>
-    <input type="text" class="form-control" name="AssignmentID" placeholder="Assignment ID" required>
+    <label>Advertisement Header</label>
+    <input type="text" class="form-control" name="header" placeholder="Advertisement Header" required>
   </div>
+
   <div class="form-group">
     <label>Details</label>
-    <textarea rows="5" class="form-control" name="Details" placeholder="Details of the assignment" required></textarea>
+    <textarea rows="5" class="form-control" name="Details" placeholder="Details of the Advertisement" required></textarea>
   </div>
+
   <div class="form-group">
     <label>Deadline</label>
-    <input type="datetime-local" class="form-control" name="Deadline" placeholder="Deadline" required>
+    <input type="date" class="form-control" name="Deadline" placeholder="Deadline" required>
   </div>
-  <div class="custom-file">
-    <input type="file" class="custom-file-input" name="AssignmentFile">
-    <label class="custom-file-label">Upload assignment</label>
-  </div>
-  <button type="submit" name="submit" class="btn btn-primary">Sign In</button>
+
+ 
+  <button type="submit" name="submit" class="btn btn-primary">Place Advertisement</button>
 </form>
 
 </div>

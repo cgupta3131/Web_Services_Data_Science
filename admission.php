@@ -1,5 +1,9 @@
 <?php
 include("config.php");
+
+$EmailExists="";
+$GateScore="";
+$Applied="";
 if( isset($_POST["submit"]) )
 {
   $name = $_POST['name'];
@@ -11,19 +15,46 @@ if( isset($_POST["submit"]) )
   $gatescore = $_POST['gatescore'];
   $gatescore_int = number_format($gatescore);
 
-  $sql = "INSERT INTO applicant(name, email, contact, age, graduationyear, graduationfield, gatescore ) VALUES ('$name','$email','$contact','$age','$graduationyear', '$graduationfield', 'gatescore_int' );";
-  $insert_data = mysqli_query($connection,$sql);
+  $sql2 = "Select * from Users WHERE `Username` = '$email'";
+  $retrieve_data = mysqli_query($connection,$sql2);
 
-
-  if($insert_data)
+  $i=0;
+  while($row = mysqli_fetch_array($retrieve_data))
   {
-    $_SESSION['msg']="Application Successfully sent !!";
+      $i=1;
+  }
+
+  if($i == 1)
+  {
+      $EmailExists = "* This EmailID already Exists";
+  }
+
+  else if($gatescore > 100)
+  {
+      $GateScore = "* Gate Score must be from 100";
   }
 
   else
   {
-      $_SESSION['msg']="Error : Not Enroll";
+      $ApplicationNumber = randomApplicationNumber();
+      $sql = "INSERT INTO applicant(name, email, contact, age, graduationyear, graduationfield, gatescore,application_number ) VALUES ('$name','$email','$contact','$age','$graduationyear', '$graduationfield', '$gatescore_int', $ApplicationNumber );";
+
+      $insert_data = mysqli_query($connection,$sql);
+      $Applied = "You have successfully Submitted your Application. Your Application Number is ".$ApplicationNumber;
   }
+}
+
+
+function randomApplicationNumber() 
+{
+    $alphabet = '1234567890';
+    $pass = array(); //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 12; $i++) {
+        $n = rand(0, $alphaLength);
+        $pass[] = $alphabet[$n];
+    }
+    return implode($pass); //turn the array into a string
 }
 ?>
 
@@ -107,14 +138,19 @@ if( isset($_POST["submit"]) )
     <label>Name</label>
     <input type="text" class="form-control" name="name" placeholder="Name" required>
   </div>
+
   <div class="form-group">
     <label>Email ID</label>
     <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+    <span class="error" style="color:red"> <?php echo $EmailExists; ?></span>
   </div>
+  <span class="error" style="color:red"> <?php echo $EmailExists; ?></span>
+
   <div class="form-group">
     <label>Contact</label>
     <input type="text" class="form-control" name="contact" placeholder="Contact" required>
   </div>
+
   <div class="form-group">
     <label>Age</label>
     <select class="form-control" name="age" required>
@@ -125,17 +161,18 @@ if( isset($_POST["submit"]) )
       ?>
     </select>
   </div>
+
   <div class="form-group">
     <label>Graduation Degree</label><br>
     <label>Year</label>
     <select class="form-control" name="graduationyear" required>
       <?php
-        for($year = 1990; $year <= date("Y"); $year += 1){
+        for($year = 2015; $year <= date("Y"); $year += 1){
           echo "<option>$year</option>";
         }
       ?>
     </select>
-
+    <br>
     <label>Field</label>
     <select class="form-control" name="graduationfield" required>
       <option>CSE</option>
@@ -144,12 +181,18 @@ if( isset($_POST["submit"]) )
       <option>Mathematics</option>
     </select>
   </div>
+
   <div class="form-group">
     <label>GATE Score</label>
     <input type="text" class="form-control" name="gatescore" placeholder="GATE Score" required>
+    <span class="error" style="color:red"> <?php echo $GateScore; ?></span>
   </div>
+
   <button type="submit" name="submit" class="btn btn-primary">Apply</button>
+  <br>
+  <span class="error" style="color:green"> <?php echo $Applied; ?></span>
 </form>
+
 </div>
 <div class='col-lg-2'></div>
 </div>

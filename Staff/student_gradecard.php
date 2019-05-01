@@ -34,9 +34,6 @@ if(isset($_POST["logout"]))
       // instantiate and use the dompdf class
       $dompdf = new Dompdf();
       $HTMLCode = "
-		Student Name : {$FullName}
-		<br>
-		Roll Number  : {$RollNumber}
       <div class='content-wrapper'>
           <div class='container'>
                 <div class='row'>
@@ -47,20 +44,23 @@ if(isset($_POST["logout"]))
 
                     <div class='row'>
                     <div class='col-md-12'>
-                        <div class='panel panel-default'>
-                            <div class='panel-body'>
-                                <div class='table-responsive table-bordered'>
-                                    <table class='table'>
-                                        <thead>
-                                            <tr>
-                                                <th>Course ID</th>
-                                                <th>Course Name</th>
-                                                <th>Grade</th>
-                                            </tr>
-                                        </thead>
+					<div class='panel panel-default'>
+					  <b>Student Name : </b>{$FullName}
+					  <br>
+					  <b>Roll Number  : </b>{$RollNumber}
+						<div class='panel-body'>
+							<div class='table-responsive table-bordered'>
+								<table class='table'>
+									<thead>
+										<tr>
+											<th>Course ID</th>
+											<th>Course Name</th>
+											<th>Grade</th>
+										</tr>
+									</thead>
 
 
-                                        <tbody>
+									<tbody>
                     ";
 
     $query = mysqli_query($con, "SELECT * FROM EnrolledStudents WHERE Username='$Username'");
@@ -77,7 +77,7 @@ if(isset($_POST["logout"]))
         if($row['Grade'] == NULL)
             $Grade = 'Not allotted yet';
 
-        else 
+        else
         	$Grade = $row['Grade'];
 
         $HTMLCode .= "<tr>
@@ -116,10 +116,6 @@ if(isset($_POST["logout"]))
   }
 
 
-
-
-
-
 ?>
 
 <html>
@@ -128,12 +124,88 @@ if(isset($_POST["logout"]))
 </head>
 
 <body>
-  Student Name : <b><?php echo $FullName?></b>
-  <br>
-  Roll Number  : <b><?php echo $RollNumber?></b>
+
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./../index.php">Data Science, IIT Guwahati</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mr-auto">
+          </ul>
+          <ul class="navbar-nav">
+            <?php
+                if(isset($_SESSION['login']) && $_SESSION['login'] == 1){
+                    echo "
+                    <li class='nav-item'>
+                      <a class='nav-link'>
+                        Welcome, {$_SESSION['FullName']}
+                      </a>
+                    </li>
+
+
+                    <li class='nav-item'>
+                    <form method = 'post'>
+                        <button type='submit' name='logout' class='nav-link btn btn-light'>Logout</button>
+                        </form>
+                    </li>
+
+                  </ul>
+                    ";
+                }
+            else{
+                echo "
+                <li class='nav-item'>
+                  <a class='nav-link' href='./../signin.php'>
+                    Sign In
+                  </a>
+                </li>
+              </ul>
+                ";
+            }
+      ?>
+
+        </div>
+      </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="./../index.php">Home</a>
+        </li>
+
+        <li class='nav-item'>
+          <a class='nav-link' href='./../change_password.php'>Change Password</a>
+        </li>
+
+        <li class='nav-item'>
+          <a class='nav-link' href='all_applicants.php'>View Applicants</a>
+        </li>
+
+        <li class='nav-item'>
+          <a class='nav-link' href='./../Staff/All_Students.php'>View Registered Students</a>
+        </li>
+
+        <li class='nav-item'>
+          <a class='nav-link' href='publish_advertisement.php'>Publish Advertisement</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href='./../HomeNoticeboard.php'>Notice Board</a>
+        </li>
+
+        <li class='nav-item'>
+          <a class='nav-link' href='./../signup.php'>Register Users</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </nav>
+
+
+
   <div class="content-wrapper">
       <div class="container">
-            <div class="row">
+            <div class="row" style="padding: 50px 0px 0px 0px;">
                   <div class="col-md-12">
                       <h1 class="page-head-line">Grade Card</h1>
                   </div>
@@ -141,10 +213,13 @@ if(isset($_POST["logout"]))
 
               <form method="post">
 
-              <div class="row" >
+              <div class="row" style="padding: 20px 0px 0px 0px;">
               <div class="col-md-12">
                   <!--    Bordered Table  -->
                   <div class="panel panel-default">
+					  <b>Student Name : </b><?php echo $FullName?>
+					  <br>
+					  <b>Roll Number  : </b><?php echo $RollNumber?>
                       <!-- /.panel-heading -->
                       <div class="panel-body">
                           <div class="table-responsive table-bordered">
@@ -176,7 +251,7 @@ if(isset($_POST["logout"]))
                                       if($row['Grade'] == NULL)
                                         $Grade = 'Not allotted yet';
 
-                                      else 
+                                      else
                                       	$Grade = $row['Grade'];
 
                                       echo "<tr>

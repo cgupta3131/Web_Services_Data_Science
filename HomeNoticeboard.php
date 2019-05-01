@@ -54,7 +54,7 @@
             if($_SESSION['Designation'] == 'Faculty'){
                 echo "
                 <li class='nav-item'>
-                  <a class='nav-link' href='./Faculty/add_course.php'>Add New Course</a>  
+                  <a class='nav-link' href='./Faculty/add_course.php'>Add New Course</a>
                 </li>
                 <li class='nav-item'>
                   <a class='nav-link' href='./Faculty/view_course.php'>My Courses</a>
@@ -78,10 +78,16 @@
                   <a class='nav-link' href='./Staff/all_applicants.php'>View Applicants</a>
                 </li>
                 <li class='nav-item'>
+                  <a class='nav-link' href='./Staff/All_Students.php'>View Registered Students</a>
+                </li>
+                <li class='nav-item'>
                   <a class='nav-link' href='./Staff/publish_advertisement.php'>Publish Advertisement</a>
                 </li>
                 <li class='nav-item'>
                   <a class='nav-link' href='HomeNoticeboard.php'>Notice Board</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='signup.php'>Register Users</a>
                 </li>
                 ";
             }

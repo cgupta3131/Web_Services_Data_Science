@@ -3,8 +3,6 @@ include("includes/config.php");
 session_start();
 
 $IDErr = "";
-$NameEmpty = "";
-$AboutEmpty = "";
 
 if( isset($_POST["submit"]) )
 {
@@ -16,14 +14,7 @@ if( isset($_POST["submit"]) )
 	$start_semester = $_POST['start_semester'];
   $username = $_SESSION['username'];
 
-  if(empty($course_name))
-    $NameEmpty = "*Course Name is Required";
-  else if(empty($course_id))
-    $IDErr = "*Course ID is Required";
-  else if(strlen($about_course) < 10)
-    $AboutEmpty = "*Minimum 10 characters are required";
-
-  else
+  if(2>1)
   {
       $sql2 = "Select * from courses WHERE `course_id` = '$course_id'";
       $retrieve_data = mysqli_query($con,$sql2);
@@ -36,7 +27,7 @@ if( isset($_POST["submit"]) )
 
       if($i == 1)
       {
-          $IDErr = "*This CourseID already Exists";
+          $IDErr = "* This CourseID already Exists";
       }
 
       else
@@ -203,22 +194,19 @@ if( isset($_POST["submit"]) )
 
  	<div class="form-group">
     	<label for="studentregno">Course Name</label>
-    	<input type="text" class="form-control" id="course_name" name="course_name"/>
-      <span class="error"><?php echo $NameEmpty; ?></span>
+    	<input type="text" class="form-control" id="course_name" name="course_name" required />
   	</div>
 
   	<div class="form-group">
     	<label for="studentregno">Course ID</label>
-    	<input type="text" class="form-control" id="course_id" name="course_id"/>
-      <span class="error"> <?php echo $IDErr; ?></span>
+    	<input type="text" class="form-control" id="course_id" name="course_id" required/>
+      <span class="error" style="color:red"> <?php echo $IDErr; ?></span>
   	</div>
-
 
 
     <div class="form-group">
       <label for="studentregno">About Course</label>
-      ​<textarea id="txtArea" class="form-control" rows="3" cols="70" name="about_course"></textarea>
-      <span class="error"><?php echo $AboutEmpty; ?></span>
+      ​<textarea id="txtArea" class="form-control" rows="3" cols="70" name="about_course" required ></textarea>
     </div>
 
   	<div class="form-group">

@@ -164,9 +164,8 @@ while($row = mysqli_fetch_array($sql))
                     <tr>
                         <th>#</th>
                         <th>Course ID</th>
-                        <th>Semester</th>
-                        <th> Application Status </th>
-                        <th> Last Date </th>
+                        <th>Course Name </th>
+                        <th> Semester </th>
                          <th>Action</th>
                     </tr>
                 </thead>
@@ -185,16 +184,13 @@ while($row = mysqli_fetch_array($sql))
                     <tr>
                         <td><?php echo $cnt;?></td>
                         <td><?php echo htmlentities($row['course_id']);?></td>
+                        <td><?php echo htmlentities($row['course_name']);?></td>
                         <td><?php echo htmlentities($row['start_semester']);?></td>
-                        <td><?php echo htmlentities($row['Application_Status']);?></td>
-                        <td><?php echo htmlentities($row['last_date']);?></td>
                         <td>
 
+                        <form method="post">
                         <a href="view_registered_students.php?idCourse=<?php echo $row['course_id']?>">
                         <button class="btn btn-primary"><i class="fa fa-edit "></i>View Students</button> </a>
-
-                        <form method="post">
-                        <button type="submit" name="<?php echo $row['course_id']?>" class="btn btn-success">Register Students</button>
                     	</form>
 
                         </td>

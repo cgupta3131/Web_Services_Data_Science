@@ -4,6 +4,7 @@ session_start();
 include("config.php");
 $EqualPassword = "";
 $CorrectPassword = "";
+$Successful = "";
 if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
     $host = $_SERVER['HTTP_HOST'];
     header("Location: http://{$host}/Web_Services_Data_Science");
@@ -12,8 +13,7 @@ if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
 if( isset($_POST["submit"]) )
 {
 
-  $_SESSION['username'] = "cgupta3131@gmail.com";
-  $username = $_SESSION['username'];
+  $username = $_SESSION['Username'];
 
   $old_password = $_POST['old_password'];
   $new_password = $_POST['new_password'];
@@ -34,6 +34,7 @@ if( isset($_POST["submit"]) )
               $hash_new = md5($new_password);
               $sql = "UPDATE Users SET `Password` = '$hash_new' WHERE `Username` = '$username';";
               $update_data = mysqli_query($connection,$sql);
+              $Successful = "Your Password has been Successfully updated";
           }
           else
           {
@@ -150,6 +151,9 @@ if( isset($_POST["submit"]) )
 </div>
 
 <button type="submit" name="submit" id="submit" class="btn btn-primary">Change Password</button>
+<br>
+    <span class="error" style="color:green"> <?php echo $Successful; ?></span>
+
 </form>
 
 </div>

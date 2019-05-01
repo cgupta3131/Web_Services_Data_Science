@@ -10,6 +10,7 @@ if(isset($_POST["logout"])){
 $username = $_SESSION['Username'];
 
 $sql=mysqli_query($con,"select * from courses WHERE Application_Status = 'Open' ");
+
 while($row = mysqli_fetch_array($sql))
 {
 	$courseId = $row['course_id'];
@@ -25,7 +26,6 @@ while($row = mysqli_fetch_array($sql))
 
 			$sql2 = "INSERT INTO RequestCourse(courseID, UserName, FacultyName, gateScore, CPI)
 				VALUES ('$courseId','$username','$FacultyName','$gateScore','0');";
-
 			$insert_data = mysqli_query($con,$sql2);
 		}
 

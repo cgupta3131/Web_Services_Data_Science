@@ -68,7 +68,8 @@ if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
 
     // $CourseID = $_SESSION['CourseID'];
 
-    if(isset($_POST["submit"])){
+    if(isset($_POST["submit"]))
+    {
       $AssignmentID = $_POST['AssignmentID'];
       $Details = $_POST['Details'];
       $Deadline = $_POST['Deadline'];
@@ -82,13 +83,16 @@ if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
       $target_file = $target_dir . basename($_FILES["AssignmentFile"]["name"]);
       // echo "<script type='text/javascript'>alert('$target_file');</script>";
 
-      if (file_exists($target_file)) {
+      if (file_exists($target_file)) 
+      {
           echo "Sorry, file already exists.";
           $IsUpload = False;
       }
 
-      if($IsUpload == True){
-        if(!is_dir("$target_course_dir")) {
+      if($IsUpload == True)
+      {
+        if(!is_dir("$target_course_dir")) 
+        {
           mkdir("$target_course_dir");
         }
 
@@ -100,10 +104,13 @@ if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
           mkdir("$target_dir");
         }
 
-        if (move_uploaded_file($_FILES["AssignmentFile"]["tmp_name"], $target_file)) {
+        if (move_uploaded_file($_FILES["AssignmentFile"]["tmp_name"], $target_file)) 
+        {
           echo "The file ". basename( $_FILES["AssignmentFile"]["name"]). " has been uploaded.";
           $query = mysqli_query($connection, "INSERT into CourseAssignments(CourseID, AssignmentID, Details, Deadline, AssignmentFile) values('$CourseID', '$AssignmentID', '$Details', '$Deadline', '$target_file')");
-        } else {
+        } 
+        else 
+        {
           echo "Sorry, there was an error uploading your file.";
         }
       }
@@ -129,7 +136,7 @@ if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
     <input type="file" class="custom-file-input" name="AssignmentFile">
     <label class="custom-file-label">Upload assignment</label>
   </div>
-  <button type="submit" name="submit" class="btn btn-primary">Sign In</button>
+  <button type="submit" name="submit" class="btn btn-primary">Upload Assignment</button>
 </form>
 
 </div>

@@ -15,7 +15,9 @@ if(isset($_POST["submit"]))
         $i += 1;
 
  	$total_count = $i*20;
-
+  if($total_count == 0)
+    $total_count = 20;
+  
     $query = mysqli_query($con, "SELECT * FROM applicant ORDER BY gatescore DESC");
 
     $j = 0;
@@ -36,18 +38,19 @@ if(isset($_POST["submit"]))
 
         $email_id = $row['email'];
         $full_name = $row['name'];
-        $non_hashed_passwd = randomPassword();
+        $non_hashed_passwd = $email_id;
+        //$non_hashed_passwd = randomPassword();
         $password = md5($non_hashed_passwd);
         $RollNumber = date("y")."0101".$suffix;
 
         //Making selected as True
-        $sql = "UPDATE applicant SET `selected` = 'True' WHERE `email` = '$email_id';";
-    	$update_data = mysqli_query($con,$sql);
+        $sql2 = "UPDATE applicant SET `selected` = 'True' WHERE `email` = '$email_id';";
+    	$update_data = mysqli_query($con,$sql2);
 
     	//Registering Student
-    	$sql = "INSERT INTO Users(Username, Password, RollNumber, FullName, Designation)
+    	 $sql3 = "INSERT INTO Users(Username, Password, RollNumber, FullName, Designation)
                     VALUES ('$email_id','$password','$RollNumber','$full_name', 'Student' );";
-    	$insert_data = mysqli_query($con,$sql);
+    	$insert_data = mysqli_query($con,$sql3);
     }
 
 

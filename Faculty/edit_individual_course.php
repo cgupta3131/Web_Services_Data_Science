@@ -2,6 +2,7 @@
 include("includes/config.php");
 session_start();
 
+$Successful = "";
 if(isset($_POST["logout"])){
   session_unset();
   header("Location: ./../index.php");
@@ -18,6 +19,7 @@ if( isset($_POST["update"]) )
 
     $sql = "UPDATE courses SET `course_name` = '$course_name', `about_course` = '$about_course', `start_semester` = '$start_semester' WHERE `course_id` = '$course_id';";
     $update_data = mysqli_query($con,$sql);
+    $Successful = "Successfully Updated";
 
 }
 
@@ -179,6 +181,8 @@ if( isset($_POST["update"]) )
     <?php } ?>
 
     <button type="submit" name="update" class="btn btn-primary"> Update Course </button>
+    <br>
+    <span class="error" style="color:green"> <?php echo $Successful; ?></span>
     </form>
 
      </div>

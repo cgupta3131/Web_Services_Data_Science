@@ -7,6 +7,8 @@ if(isset($_POST["logout"])){
   header("Location: ./../index.php");
 }
 
+$Successful = "";
+
 $_SESSION['CourseID'] = $_GET['idCourse'];
 $CourseID = $_SESSION['CourseID'];
 
@@ -24,7 +26,9 @@ if( isset($_POST["submit"]) )
 	else
 	{
 		$sql = "UPDATE courses SET `last_date` = '$last_date', `Application_Status` = 'Open' WHERE `course_id` = '$CourseID';";
-        $update_data = mysqli_query($con,$sql);
+    $update_data = mysqli_query($con,$sql);
+    $Successful = "Successfully Sent Application";
+    
 	}
 }
 
@@ -159,7 +163,8 @@ if( isset($_POST["submit"]) )
     </div>
 
    	<button type="submit" name="submit" id="submit" class="btn btn-primary">Send Application</button>
-
+    <br>
+    <span class="error" style="color:green"> <?php echo $Successful; ?></span>
    </form>
    	</div>
 	<div class='col-lg-2'></div>

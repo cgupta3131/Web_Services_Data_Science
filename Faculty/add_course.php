@@ -8,7 +8,7 @@ if(isset($_POST["logout"])){
 }
 
 $IDErr = "";
-
+$Successful = "";
 if( isset($_POST["submit"]) )
 {
   //Remove this line when getting the data
@@ -39,6 +39,7 @@ if( isset($_POST["submit"]) )
           $sql = "INSERT INTO courses(course_name, course_id, about_course, start_semester, username,seats_remaining) VALUES ('$course_name','$course_id','$about_course','$start_semester', '$username','20' );";
 
           $insert_data = mysqli_query($con,$sql);
+          $Successful = "Course has been Added Successfully";
 
       }
   }
@@ -214,6 +215,9 @@ if( isset($_POST["submit"]) )
 
 
    	<button type="submit" name="submit" id="submit" class="btn btn-primary">Add Course</button>
+    <br>
+    <span class="error" style="color:green"> <?php echo $Successful; ?></span>
+
 
    </form>
    	</div>

@@ -1,7 +1,7 @@
 <?php
 include("includes/config.php");
 session_start();
-
+$username = $_SESSION['Username'];
 if(isset($_POST["logout"])){
   session_unset();
   header("Location: ./../index.php");
@@ -164,7 +164,7 @@ if(isset($_POST["logout"])){
                                     <tbody>
                                     <?php
 
-                                    $sql=mysqli_query($con,"select * from courses WHERE `username` = 'chirag' ");
+                                    $sql=mysqli_query($con,"select * from courses WHERE `username` = '$username' ");
                                     $cnt=1;
                                     while($row = mysqli_fetch_array($sql))
                                     {

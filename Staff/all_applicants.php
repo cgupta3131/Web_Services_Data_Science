@@ -186,37 +186,78 @@ function randomPassword() {
     </nav>
 
 
+<div class="content-wrapper">
+    <div class="container">
+          <div class="row" style='padding: 50px 0px 0px 0px;'>
+                <div class="col-md-12">
+                    <h1 class="page-head-line">Applicants for M.Tech. in Data Science</h1>
+                </div>
+            </div>
 
-	<div class='fluid-container'>
-        <div class='row' style='padding: 50px 0px 0px 0px;'>
-        <div class='col-lg-2'></div>
-            <div class='col'>
+            <div class="row" style='padding: 20px 0px 0px 0px;'>
+            <div class="col-md-12">
+                <!--    Bordered Table  -->
+                <div class="panel panel-default">
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive table-bordered">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Application Number</th>
+                                         <th>Contact</th>
+                                         <th>Gate Score</th>
+                                    </tr>
+                                </thead>
 
-	<?php
-    $query = mysqli_query($con, "SELECT * FROM applicant where `selected` = 'False'");
 
-    $bgcolor = array('bg-success', 'bg-danger', 'bg-warning', 'bg-info');
+                                <tbody>
+                                <?php
 
-    $i = 0;
-    while($row = mysqli_fetch_assoc($query))
-    {
-        echo "<div class='card text-white {$bgcolor[$i%4]} mb-3 pull-left col-height col-middle col-xs-5' style='max-width: 100rem;'>
-                <h5 class='card-header'>{$row['name']}</h5>
-                  <div class='card-body'>
-                    <p class='card-text'>{$row['email']}</p>
-                  </div>
-              </div>";
-        $i += 1;
-    }
-  ?>
+                                $sql = mysqli_query($con, "SELECT * FROM applicant where `selected` = 'False'");
 
-  <form method="post">
-  <button type="submit" name="submit" class="btn btn-primary">Approve Applicants</button>
-  </form>
+                                $cnt=1;
+                                while($row = mysqli_fetch_array($sql))
+                                {
+                                  $email = $row['email'];
 
-</div>
-<div class='col-lg-2'></div>
-</div>
+                                ?>
+                                    <tr>
+                                        <td><?php echo $cnt;?></td>
+                                        <td><?php echo htmlentities($row['name']);?></td>
+                                        <td><?php echo htmlentities($email);?></td>
+                                        <td><?php echo htmlentities($row['application_number']);?></td>
+                                        <td><?php echo htmlentities($row['contact']);?></td>
+                                        <td><?php echo htmlentities($row['gatescore']);?></td>
+
+
+                                    </tr>
+                                    <?php
+                                    $cnt++;
+
+                                } ?>
+
+
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                 <!--  End  Bordered Table  -->
+            </div>
+        </div>
+
+        <form method="post">
+        <button type="submit" name="submit" class="btn btn-primary">Approve Applicants</button>
+        </form>
+
+
+    </div>
 </div>
 
 

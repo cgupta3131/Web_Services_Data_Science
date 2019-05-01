@@ -4,7 +4,7 @@ session_start();
 $_SESSION['CourseID'] = $_GET['idCourse'];
 
 if( isset($_POST["update"]) )
-{   
+{
     $course_id = $_POST['course_id'];
     $course_name = $_POST['course_name'];
     $about_course = $_POST['about_course'];
@@ -39,14 +39,116 @@ if( isset($_POST["update"]) )
     <title>View Course</title>
 </head>
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./../index.php">Data Science, IIT Guwahati</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mr-auto">
+          </ul>
+          <ul class="navbar-nav">
+            <?php
+                if(isset($_SESSION['login']) && $_SESSION['login'] == 1){
+                    echo "
+                    <li class='nav-item'>
+                      <a class='nav-link'>
+                        Welcome, {$_SESSION['FullName']}
+                      </a>
+                    </li>
+
+
+                    <li class='nav-item'>
+                    <form method = 'post'>
+                        <button type='submit' name='logout' class='nav-link btn btn-light'>Logout</button>
+                        </form>
+                    </li>
+
+                  </ul>
+                    ";
+                }
+            else{
+                echo "
+                <li class='nav-item'>
+                  <a class='nav-link' href='./../signup.php'>
+                    Sign Up
+                  </a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='./../signin.php'>
+                    Sign In
+                  </a>
+                </li>
+              </ul>
+                ";
+            }
+      ?>
+
+        </div>
+      </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="./../index.php">Home</a>
+          </li>
+
+          <?php
+              if($_SESSION['Designation'] == 'Student'){
+                  echo "
+                  <li class='nav-item'>
+                    <a class='nav-link' href='./../Students/select_course.php'>Apply for course</a>
+                  </li>
+                  <li class='nav-item'>
+                    <a class='nav-link' href='./../ViewEnrolledCourses.php'>Enrolled Courses</a>
+                  </li>
+                  ";
+              }
+          ?>
+
+          <li class="nav-item">
+            <a class="nav-link" href="./../change_password.php">Change Password</a>
+          </li>
+
+          <?php
+              if($_SESSION['Designation'] == 'Faculty'){
+                  echo "
+                  <li class='nav-item'>
+                    <a class='nav-link' href='add_course.php'>Add New Course</a>
+                  </li>
+                  <li class='nav-item'>
+                    <a class='nav-link' href='view_course.php'>My Courses</a>
+                  </li>
+
+                  <li class='nav-item'>
+                    <a class='nav-link' href='request_course.php'>Student Requests</a>
+                  </li>
+                  <li class='nav-item'>
+                    <a class='nav-link' href='students_courses.php'>My Students</a>
+                  </li>
+                  ";
+              }
+          ?>
+
+
+          <?php
+              if($_SESSION['Designation'] == 'Staff'){
+                  echo "
+                  <li class='nav-item'>
+                    <a class='nav-link' href='./../Staff/all_applicants.php'>View Applicants</a>
+                  </li>
+                  ";
+              }
+          ?>
+
+        </ul>
+      </div>
+    </nav>
+
         <div class="content-wrapper">
         <div class="container">
 
-              <div class="row">
-              </div>
-                <div class="row" >
-                  <div class="col-md-3"></div>
-                    <div class="col-md-6">
+                <div class="row" style='padding: 50px 0px 0px 0px;'>
+                    <div class="col-md-12">
                         <div class="panel panel-default">
 
 		<?php
@@ -73,14 +175,14 @@ if( isset($_POST["update"]) )
 
         <div class="form-group">
         <label for="studentregno">Semester</label>
-        <select name="start_semester">
+        <select name="start_semester" class='form-control'>
               <option value="Spring">Spring</option>
               <option value="Fall">Fall</option>
         </select>
     </div>
     <?php } ?>
 
-    <button type="submit" name="update" class="btn btn-default"> Update Course </button>
+    <button type="submit" name="update" class="btn btn-primary"> Update Course </button>
     </form>
 
      </div>

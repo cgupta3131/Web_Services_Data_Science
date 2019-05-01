@@ -8,7 +8,7 @@
       $host = $_SERVER['HTTP_HOST'];
       header("Location: http://{$host}/Web_Services_Data_Science");
   }
-  
+
 
   require_once 'dompdf/lib/html5lib/Parser.php';
   require_once 'dompdf/lib/php-font-lib/src/FontLib/Autoloader.php';
@@ -17,8 +17,7 @@
   Dompdf\Autoloader::register();
   use Dompdf\Dompdf;
 
-  // $CourseID = $_SESSION['CourseID'];
-  $CourseID = 'CS243';
+  $CourseID = $_SESSION['CourseID'];
 
   if(isset($_POST["submit"])){
       foreach($_POST['Grade'] as $key => $value) {
@@ -39,8 +38,8 @@
                 <div class='row'>
                       <div class='col-md-12'>
                           <center><h1 class='page-head-line'>";
-      $CourseName = 'Software Programming Lab';
-      $CourseID = 'CS243';
+      $CourseName = $_SESSION['CourseName'];
+      $CourseID = $_SESSION['CourseID'];
       $HTMLCode .= "$CourseName ($CourseID)</h1></center>
                         </div>
                     </div>
@@ -138,7 +137,7 @@
       <div class="container">
             <div class="row">
                   <div class="col-md-12">
-                      <h1 class="page-head-line"><?php $CourseName = 'Software Programming Lab'; $CourseID = 'CS243'; echo "$CourseName ($CourseID)" ?></h1>
+                      <h1 class="page-head-line"><?php $CourseName = $_SESSION['CourseName']; $CourseID = $_SESSION['CourseID']; echo "$CourseName ($CourseID)" ?></h1>
                   </div>
               </div>
 
@@ -168,7 +167,7 @@
 
                                   <?php
 
-                                  $CourseID = 'CS243';
+                                  $CourseID = $_SESSION['CourseID'];
 
                                   $query = mysqli_query($connection, "SELECT * FROM EnrolledStudents WHERE CourseID='$CourseID'");
 

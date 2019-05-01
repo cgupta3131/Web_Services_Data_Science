@@ -1,6 +1,12 @@
 <?php
 session_start();
+include("config.php");
+
 $_SESSION['CourseID'] = $_GET['CourseID'];
+$query = mysqli_query($connection, "SELECT * FROM courses WHERE course_id = '$CourseID'");
+if($row = mysqli_fetch_assoc($query)){
+    $_SESSION['CourseName'] = $row['course_name'];
+}
 ?>
 
 <html>

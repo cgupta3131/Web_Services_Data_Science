@@ -7,15 +7,14 @@
       $host = $_SERVER['HTTP_HOST'];
       header("Location: http://{$host}/Web_Services_Data_Science");
   }
-  
+
   // $CourseID = $_SESSION['CourseID'];
 
   if(isset($_POST["submit"])){
     $NoticeHead = $_POST['NoticeHead'];
     $NoticeBody = ($_POST["NoticeBody"]);
     $Username = $_SESSION['Username'];
-    // $CourseID = $_SESSION['CourseID'];
-    $CourseID = 'CS243';
+    $CourseID = $_SESSION['CourseID'];
     $query = mysqli_query($connection, "INSERT into CourseNotices(CourseID, Username, NoticeHead, NoticeBody) values('$CourseID', '$Username', '$NoticeHead', '$NoticeBody')");
   }
 ?>
@@ -46,8 +45,7 @@
 
   include("config.php");
 
-  // $CourseID = $_SESSION['CourseID'];
-  $CourseID = 'CS243';
+  $CourseID = $_SESSION['CourseID'];
 
   $query = mysqli_query($connection, "SELECT * FROM CourseAssignments WHERE CourseID='$CourseID'");
 

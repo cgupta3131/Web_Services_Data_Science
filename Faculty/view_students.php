@@ -25,6 +25,9 @@ $_SESSION['CourseID'] = $_GET['idCourse'];
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+        <img src="./../media/home/iitglogo.png" width="40" height="40" alt="">
+      </a>
         <a class="navbar-brand" href="./../index.php">Data Science, IIT Guwahati</a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mr-auto">

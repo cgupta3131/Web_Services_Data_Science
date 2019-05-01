@@ -38,6 +38,9 @@ if( isset($_POST["update"]) )
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+        <img src="./../media/home/iitglogo.png" width="40" height="40" alt="">
+      </a>
         <a class="navbar-brand" href="./../index.php">Data Science, IIT Guwahati</a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mr-auto">
@@ -64,7 +67,7 @@ if( isset($_POST["update"]) )
                 }
             else{
                 echo "
-                
+
                 <li class='nav-item'>
                   <a class='nav-link' href='./../signin.php'>
                     Sign In
@@ -150,7 +153,7 @@ if( isset($_POST["update"]) )
 		{ ?>
 
         <form name="dept" method="post" enctype="multipart/form-data">
-        
+
         <div class="form-group">
         <label for="studentname">Course Name </label>
         <input type="text" class="form-control" id="course_name" name="course_name" value="<?php echo htmlentities($row['course_name']);?>"/>

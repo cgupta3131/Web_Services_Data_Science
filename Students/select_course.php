@@ -7,8 +7,7 @@ if(isset($_POST["logout"])){
   header("Location: ./../index.php");
 }
 
-$_SESSION['username'] = "cgupta3131@gmail.com";
-$username = $_SESSION['username'];
+$username = $_SESSION['Username'];
 
 $sql=mysqli_query($con,"select * from courses WHERE Application_Status = 'Open' ");
 while($row = mysqli_fetch_array($sql))
@@ -180,8 +179,7 @@ while($row = mysqli_fetch_array($sql))
 
                 <tbody>
                 <?php
-                $_SESSION['username'] = "cgupta3131@gmail.com";
-  				$username = $_SESSION['username'];
+  				      $username = $_SESSION['Username'];
 
                 $sql=mysqli_query($con,"select * from courses WHERE Application_Status = 'Open'");
                 $cnt=1;
@@ -201,7 +199,7 @@ while($row = mysqli_fetch_array($sql))
                     <tr>
 
                         <td><?php echo $cnt;?></td>
-                        <td><?php echo htmlentities($row['course_id']);?></td>
+                        <td valign="bottom"><?php echo htmlentities($row['course_id']);?></td>
                         <td><?php echo htmlentities($row['start_semester']);?></td>
                         <td><?php echo htmlentities($row['course_name']);?></td>
                         <td><?php echo htmlentities($row['last_date']);?></td>

@@ -15,6 +15,7 @@ if(isset($_POST["submit"]))
         $i += 1;
 
  	$total_count = $i*20;
+ 	$total_count = 3;
  	//echo "Total rows: " . $total_count;
 
     $query = mysqli_query($con, "SELECT * FROM applicant ORDER BY gatescore DESC");
@@ -22,7 +23,7 @@ if(isset($_POST["submit"]))
     $j = 0;
     while($row = mysqli_fetch_assoc($query))
     {
-    	if($j > $total_count)
+    	if($j >= $total_count)
     		break;
 
         $j += 1;
@@ -40,8 +41,6 @@ if(isset($_POST["submit"]))
         $non_hashed_passwd = randomPassword();
         $password = md5($non_hashed_passwd);
         $RollNumber = date("y")."0101".$suffix;
-
-        echo $RollNumber."<br>";
 
         //Making selected as True
         $sql = "UPDATE applicant SET `selected` = 'True' WHERE `email` = '$email_id';";
@@ -192,7 +191,7 @@ function randomPassword() {
             <div class='col'>
 
 	<?php
-    $query = mysqli_query($con, "SELECT * FROM applicant");
+    $query = mysqli_query($con, "SELECT * FROM applicant where `selected` = 'False'");
 
     $bgcolor = array('bg-success', 'bg-danger', 'bg-warning', 'bg-info');
 

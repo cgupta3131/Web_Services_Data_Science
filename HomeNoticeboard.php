@@ -54,7 +54,7 @@
             if($_SESSION['Designation'] == 'Faculty'){
                 echo "
                 <li class='nav-item'>
-                  <a class='nav-link' href='./Faculty/add_course.php'>Add New Course</a>
+                  <a class='nav-link' href='./Faculty/add_course.php'>Add New Course</a>  
                 </li>
                 <li class='nav-item'>
                   <a class='nav-link' href='./Faculty/view_course.php'>My Courses</a>

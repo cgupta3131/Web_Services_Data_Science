@@ -12,12 +12,11 @@ $IDErr = "";
 if( isset($_POST["submit"]) )
 {
   //Remove this line when getting the data
-  $_SESSION['username'] = "chirag";
 	$course_name = $_POST['course_name'];
 	$course_id = $_POST['course_id'];
 	$about_course = $_POST['about_course'];
 	$start_semester = $_POST['start_semester'];
-  $username = $_SESSION['username'];
+  $username = $_SESSION['Username'];
 
   if(2>1)
   {
@@ -41,15 +40,6 @@ if( isset($_POST["submit"]) )
 
           $insert_data = mysqli_query($con,$sql);
 
-          if($insert_data)
-          {
-            $_SESSION['msg']="Enroll Successfully !!";
-          }
-
-          else
-          {
-              $_SESSION['msg']="Error : Not Enroll";
-          }
       }
   }
 }

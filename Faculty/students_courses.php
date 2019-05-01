@@ -7,8 +7,7 @@ if(isset($_POST["logout"])){
   header("Location: ./../index.php");
 }
 
-$_SESSION['username'] = "chirag";
-$username = $_SESSION['username'];
+$username = $_SESSION['Username'];
 
 $sql=mysqli_query($con,"select * from courses WHERE `username` = '$username' AND `Application_Status` = 'Open' OR `Application_Status` = 'Deadline Passed' ");
 

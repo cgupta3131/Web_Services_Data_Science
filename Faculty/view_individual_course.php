@@ -50,11 +50,7 @@ $_SESSION['CourseID'] = $_GET['idCourse'];
                 }
             else{
                 echo "
-                <li class='nav-item'>
-                  <a class='nav-link' href='./../signup.php'>
-                    Sign Up
-                  </a>
-                </li>
+               
                 <li class='nav-item'>
                   <a class='nav-link' href='./../signin.php'>
                     Sign In

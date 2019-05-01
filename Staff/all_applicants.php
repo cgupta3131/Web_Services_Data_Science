@@ -15,8 +15,6 @@ if(isset($_POST["submit"]))
         $i += 1;
 
  	$total_count = $i*20;
- 	$total_count = 3;
- 	//echo "Total rows: " . $total_count;
 
     $query = mysqli_query($con, "SELECT * FROM applicant ORDER BY gatescore DESC");
 

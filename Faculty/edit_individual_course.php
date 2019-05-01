@@ -19,15 +19,6 @@ if( isset($_POST["update"]) )
     $sql = "UPDATE courses SET `course_name` = '$course_name', `about_course` = '$about_course', `start_semester` = '$start_semester' WHERE `course_id` = '$course_id';";
     $update_data = mysqli_query($con,$sql);
 
-    if($update_data)
-    {
-        $_SESSION['msg']="Enroll Successfully !!";
-    }
-
-    else
-    {
-        $_SESSION['msg']="Error : Not Enroll";
-    }
 }
 
 
@@ -73,11 +64,7 @@ if( isset($_POST["update"]) )
                 }
             else{
                 echo "
-                <li class='nav-item'>
-                  <a class='nav-link' href='./../signup.php'>
-                    Sign Up
-                  </a>
-                </li>
+                
                 <li class='nav-item'>
                   <a class='nav-link' href='./../signin.php'>
                     Sign In

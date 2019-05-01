@@ -235,8 +235,14 @@
                   </div>
               </div>
           </div>
+          
+          <?php
 
-          <button type="submit" name="submit" class="btn btn-primary">Update grades</button>
+          if($query->num_rows != 0)
+          { 
+              echo "<button type='submit' name='submit' class='btn btn-primary'>Update grades</button>";
+          }
+          ?>
 
           </form>
 

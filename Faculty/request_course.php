@@ -7,7 +7,6 @@ if(isset($_POST["logout"])){
   header("Location: ./../index.php");
 }
 
-$_SESSION['username'] = "chirag";
 $username = $_SESSION['Username'];
 
 $sql=mysqli_query($con,"select * from courses WHERE `username` = '$username' AND `Application_Status` = 'Open' OR `Application_Status` = 'Deadline Passed' ");
@@ -79,11 +78,7 @@ while($row = mysqli_fetch_array($sql))
                 }
             else{
                 echo "
-                <li class='nav-item'>
-                  <a class='nav-link' href='./../signup.php'>
-                    Sign Up
-                  </a>
-                </li>
+                
                 <li class='nav-item'>
                   <a class='nav-link' href='./../signin.php'>
                     Sign In

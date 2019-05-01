@@ -2,6 +2,11 @@
 include("includes/config.php");
 session_start();
 
+if(isset($_POST["logout"])){
+  session_unset();
+  header("Location: ./../index.php");
+}
+
 if(isset($_POST["submit"]))
 {
 	$query = mysqli_query($con, "SELECT * FROM courses");

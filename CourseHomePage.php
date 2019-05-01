@@ -25,6 +25,8 @@ if($row = mysqli_fetch_assoc($query)){
           <a class="nav-link" href="index.php">Home</a>
         </li>
         <?php
+        
+        if(isset($_SESSION['login']) && $_SESSION['login'] == 1){
         if($_SESSION['Designation'] == 'Student'){
             echo "
             <li class='nav-item'>
@@ -45,16 +47,18 @@ if($row = mysqli_fetch_assoc($query)){
             </li>
             ";
         }
+
+        echo "<li class='nav-item'>
+          <a class='nav-link' href='coursenotice.php'>Course Notice</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href='ViewCourseAssignments.php'>Course Assignment</a>
+        </li>";
+
+      }
+
+    
         ?>
-
-        <li class="nav-item">
-          <a class="nav-link" href="coursenotice.php">Course Notice</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="ViewCourseAssignments.php">Course Assignment</a>
-        </li>
-
-
       </ul>
     </div>
   </nav>

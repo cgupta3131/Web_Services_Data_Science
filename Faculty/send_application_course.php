@@ -1,6 +1,12 @@
 <?php
 include("includes/config.php");
 session_start();
+
+if(isset($_POST["logout"])){
+  session_unset();
+  header("Location: ./../index.php");
+}
+
 $_SESSION['CourseID'] = $_GET['idCourse'];
 $CourseID = $_SESSION['CourseID'];
 

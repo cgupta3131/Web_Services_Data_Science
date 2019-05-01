@@ -1,6 +1,12 @@
 <?php
 include("includes/config.php");
 session_start();
+
+if(isset($_POST["logout"])){
+  session_unset();
+  header("Location: ./../index.php");
+}
+
 $_SESSION['username'] = "cgupta3131@gmail.com";
 $username = $_SESSION['username'];
 

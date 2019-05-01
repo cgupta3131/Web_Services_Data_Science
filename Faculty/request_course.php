@@ -190,10 +190,11 @@ while($row = mysqli_fetch_array($sql))
                         <td><?php echo htmlentities($row['last_date']);?></td>
                         <td>
 
-                        <form method="post">
+                        
+
                         <a href="view_students.php?idCourse=<?php echo $row['course_id']?>">
                         <button class="btn btn-primary"><i class="fa fa-edit "></i>View Students</button> </a>
-
+                      <form method="post">
                         <button type="submit" name="<?php echo $row['course_id']?>" class="btn btn-default">Register Students</button>
                     	</form>
 

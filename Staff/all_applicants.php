@@ -43,7 +43,8 @@ if(isset($_POST["submit"]))
     	$update_data = mysqli_query($con,$sql);
 
     	//Registering Student
-    	$sql = "INSERT INTO Users(Username, Password, RollNumber, FullName) VALUES ('$email_id','$password','$RollNumber','$full_name' );";
+    	$sql = "INSERT INTO Users(Username, Password, RollNumber, FullName, Designation) 
+                    VALUES ('$email_id','$password','$RollNumber','$full_name', 'Student' );";
     	$insert_data = mysqli_query($con,$sql);
     }
 

@@ -2,7 +2,8 @@
 session_start();
 
 include("config.php");
-
+$EqualPassword = "";
+$CorrectPassword = "";
 if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1)){
     $host = $_SERVER['HTTP_HOST'];
     header("Location: http://{$host}/Web_Services_Data_Science");
@@ -20,13 +21,11 @@ if( isset($_POST["submit"]) )
   $hash_old = md5($old_password);
 
   //echo $new_password."   ".$confirm_password."<br>";
-  $retrieve_passwd=mysqli_query($con,"select * from Users WHERE `Username` = '$username' ");
+  $retrieve_passwd=mysqli_query($connection,"select * from Users WHERE `Username` = '$username' ");
 
   while($row = mysqli_fetch_array($retrieve_passwd))
   {
       $passwd = $row['Password'];
-      //echo $passwd . "<br>";
-      //echo $hash_old;
 
       if($hash_old == $passwd)
       {
@@ -34,19 +33,17 @@ if( isset($_POST["submit"]) )
           {
               $hash_new = md5($new_password);
               $sql = "UPDATE Users SET `Password` = '$hash_new' WHERE `Username` = '$username';";
-              $update_data = mysqli_query($con,$sql);
+              $update_data = mysqli_query($connection,$sql);
           }
           else
           {
-            $message = "Two passwords don't match";
-            echo "<script type='text/javascript'>alert('$message');</script>";
+            $EqualPassword = "Both Passwords don't match";
           }
       }
 
       else
       {
-        $message = "Please Input Correct Password";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        $CorrectPassword = "Please Input Correct Password";
       }
   }
 }
@@ -125,17 +122,19 @@ if( isset($_POST["submit"]) )
 <form name="dept" method="post" enctype="multipart/form-data">
 <div class="form-group">
     <label for="studentregno">Old Password</label>
-    <input type="password" class="form-control" id="course_name" name="old_password"/>
+    <input type="password" class="form-control" id="course_name" name="old_password" required="true" />
+    <span class="error" style="color:red"> <?php echo $CorrectPassword; ?></span>
 </div>
 
 <div class="form-group">
     <label for="studentregno">New Password</label>
-    <input type="password" class="form-control" id="course_id" name="new_password"/>
+    <input type="password" class="form-control" id="course_id" name="new_password" required="true" />
 </div>
 
 <div class="form-group">
     <label for="studentregno">Confirm New Password</label>
-    <input type="password" class="form-control" id="about_course" name="confirm_password"/>
+    <input type="password" class="form-control" id="about_course" name="confirm_password" required="true" />
+    <span class="error" style="color:red"> <?php echo $EqualPassword; ?></span>
 </div>
 
 <button type="submit" name="submit" id="submit" class="btn btn-primary">Change Password</button>

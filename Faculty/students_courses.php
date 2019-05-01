@@ -180,7 +180,6 @@ while($row = mysqli_fetch_array($sql))
                 while($row = mysqli_fetch_array($sql))
                 {
                 ?>
-
                     <tr>
                         <td><?php echo $cnt;?></td>
                         <td><?php echo htmlentities($row['course_id']);?></td>
@@ -188,10 +187,8 @@ while($row = mysqli_fetch_array($sql))
                         <td><?php echo htmlentities($row['start_semester']);?></td>
                         <td>
 
-                        <form method="post">
                         <a href="view_registered_students.php?idCourse=<?php echo $row['course_id']?>">
                         <button class="btn btn-primary"><i class="fa fa-edit "></i>View Students</button> </a>
-                    	</form>
 
                         </td>
                     </tr>

@@ -9,7 +9,6 @@
       header("Location: http://{$host}/Web_Services_Data_Science");
   }
 
-
   // $CourseID = $_SESSION['CourseID'];
 
   if(isset($_POST["submit"])){

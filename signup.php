@@ -1,6 +1,7 @@
 <?php
   include("config.php");
 
+  $EmailExists = "";
   $PasswordEmpty = "";
   $ConfirmEmpty = "";
 
@@ -11,6 +12,7 @@
     $password = md5($_POST["password"]);
     $fullname = $_POST['fullname'];
     $confirmpassword = md5($_POST["confirmpassword"]);
+    $designation = $_POST['designation'];
 
     
     if(strlen($password) < 6)
@@ -19,10 +21,28 @@
       $ConfirmEmpty = "*Both password are not matching";
     else
     {
-      $query = mysqli_query($connection, "INSERT into Users(Username, Password, FullName) values('$username', '$password', $fullname)");
+      $sql2 = "Select * from Users WHERE `Username` = '$username'";
+      $retrieve_data = mysqli_query($connection,$sql2);
 
-      $host = $_SERVER['HTTP_HOST'];
-      header("Location: http://{$host}Web_Services_Data_Science"); 
+      $i=0;
+      while($row = mysqli_fetch_array($retrieve_data))
+      {
+          $i=1;
+      }
+
+      if($i == 1)
+      {
+          $EmailExists = "* This EmailID already Exists";
+      }
+
+      else
+      {
+        $query = mysqli_query($connection, "INSERT into Users(Username, Password, FullName, Designation) 
+                      values('$username', '$password', '$fullname', '$designation')");
+      }
+      
+      //$host = $_SERVER['HTTP_HOST'];
+      //header("Location: http://{$host}Web_Services_Data_Science"); 
     }
   }
 ?>
@@ -106,6 +126,7 @@
   <div class="form-group">
     <label>Email Address</label>
     <input type="email" class="form-control" name="username" placeholder="Email Address" required>
+    <span class="error" style="color:red"> <?php echo $EmailExists; ?></span>
   </div>
 
   <div class="form-group">
@@ -126,6 +147,14 @@
     <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password" required>
     <span class="error"><?php echo $ConfirmEmpty; ?></span>
   </div>
+  
+  <div class="form-group">
+      <label for="studentregno">Semester</label>
+      <select name="designation" class='form-control'>
+        <option value="Faculty">Faculty</option>
+        <option value="Staff">Staff</option>
+    </select>
+    </div>
 
   <button type="submit" name="submit" class="btn btn-primary">Sign Up</button>
 </form>

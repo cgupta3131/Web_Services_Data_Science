@@ -175,7 +175,6 @@ session_start();
                                             <td>
 
                                             <a href="view_individual_course.php?idCourse=<?php echo $row['course_id']?>">
-
                                             <button class="btn btn-primary"><i class="fa fa-edit "></i>View</button> </a>
 
                                             <a href="edit_individual_course.php?idCourse=<?php echo $row['course_id']?>">

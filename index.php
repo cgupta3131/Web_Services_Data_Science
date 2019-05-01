@@ -59,12 +59,17 @@ session_start();
                 <li class='nav-item'>
                   <a class='nav-link' href='./Staff/all_applicants.php'>View Applicants</a>
                 </li>
-
+                <li class='nav-item'>
+                  <a class='nav-link' href='./Staff/All_Students.php'>View Registered Students</a>
+                </li>
                 <li class='nav-item'>
                   <a class='nav-link' href='./Staff/publish_advertisement.php'>Publish Advertisement</a>
                 </li>
                 <li class='nav-item'>
                   <a class='nav-link' href='HomeNoticeboard.php'>Notice Board</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='signup.php'>Register Users</a>
                 </li>
                 ";
             }
@@ -102,18 +107,18 @@ session_start();
 
   <div class="carousel-inner embed-responsive-item">
 
-    <div class="carousel-item active">
-      <img src="media/home/Data-Science-vs.-Big-Data-vs.jpg" class="d-block w-100 h-100" alt="image">
-    </div>
-
-    <div class="carousel-item">
-      <img src="media/home/1_QGWyxDaFhavZa495eJBO9Q.jpeg" class="d-block w-100 h-100" alt="image">
-    </div>
-
-    <div class="carousel-item">
-      <img src="media/home/spa-datascience-news.jpg" class="d-block w-100" alt="image">
-    </div>
+  <div class="carousel-item active">
+    <img src="media/home/141468826457f729fba676b.jpg" class="d-block w-100 h-100" alt="image">
   </div>
+
+  <div class="carousel-item">
+    <img src="media/home/maxresdefault.jpg" class="d-block w-100 h-100" alt="image">
+  </div>
+
+  <div class="carousel-item">
+    <img src="media/home/iitggate.jpg" class="d-block w-100" alt="image">
+  </div>
+</div>
 
   <!-- Left and right controls -->
   <a class="left carousel-control carousel-control-prev" href="#myCarousel" data-slide="prev">

@@ -25,7 +25,7 @@ if($row = mysqli_fetch_assoc($query)){
           <a class="nav-link" href="index.php">Home</a>
         </li>
         <?php
-        
+
         if(isset($_SESSION['login']) && $_SESSION['login'] == 1){
         if($_SESSION['Designation'] == 'Student'){
             echo "
@@ -57,11 +57,85 @@ if($row = mysqli_fetch_assoc($query)){
 
       }
 
-    
+
         ?>
       </ul>
     </div>
   </nav>
+
+
+  <div class='container-fluid'>
+      <div class='row' style='padding: 50px 0px 0px 0px;'>
+          <div class='col-lg-2'></div>
+          <div class='col'>
+
+    <div id="myCarousel" class="carousel slide embed-responsive embed-responsive-16by9" data-ride="carousel">
+
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+
+    <div class="carousel-inner embed-responsive-item">
+
+
+        <div class="carousel-item active">
+          <img src="media/home/Data-Science-vs.-Big-Data-vs.jpg" class="d-block w-100 h-100" alt="image">
+        </div>
+
+        <div class="carousel-item">
+          <img src="media/home/1_QGWyxDaFhavZa495eJBO9Q.jpeg" class="d-block w-100 h-100" alt="image">
+        </div>
+
+        <div class="carousel-item">
+          <img src="media/home/spa-datascience-news.jpg" class="d-block w-100" alt="image">
+        </div>
+      </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control carousel-control-prev" href="#myCarousel" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control carousel-control-next" href="#myCarousel" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+
+
+  </div>
+  <div class='col-lg-2'></div>
+  </div>
+  </div>
+
+
+  <div class='container-fluid'>
+      <div class='row' style='padding: 50px 0px 0px 0px;'>
+          <div class='col-lg-1'></div>
+          <div class='col'>
+
+        <?php
+            echo "<h3>{$_SESSION['CourseID']}</h3>";
+
+            $CourseID = $_SESSION['CourseID'];
+            $query = mysqli_query($connection, "SELECT * FROM courses WHERE course_id = '$CourseID'");
+            if($row = mysqli_fetch_assoc($query)){
+                $AboutCourse = $row['about_course'];
+            }
+
+            echo "<h6>{$AboutCourse}</h6>";
+        ?>
+
+  </div>
+  <div class='col-lg-1'></div>
+  </div>
+  <div class='row' style='padding: 50px 0px 0px 0px;'></div>
+  </div>
+
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

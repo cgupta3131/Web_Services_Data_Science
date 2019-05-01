@@ -1,4 +1,6 @@
 <?php
+session_start();
+
   include("config.php");
 
   $EmailExists = "";
@@ -104,6 +106,18 @@
                 <li class='nav-item'>
                   <a class='nav-link' href='./Staff/all_applicants.php'>View Applicants</a>
                 </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='./Staff/All_Students.php'>View Registered Students</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='./Staff/publish_advertisement.php'>Publish Advertisement</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='HomeNoticeboard.php'>Notice Board</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='signup.php'>Register Users</a>
+                </li>
                 ";
             }
         }
@@ -127,11 +141,7 @@
       <div class='col-lg-2'></div>
           <div class='col'>
   <form method="post">
-  <div class="form-group">
-    <label>Email Address</label>
-    <input type="email" class="form-control" name="username" placeholder="Email Address" required>
-    <span class="error" style="color:red"> <?php echo $EmailExists; ?></span>
-  </div>
+
 
   <div class="form-group">
     <label>Full Name</label>
@@ -153,7 +163,13 @@
   </div>
 
   <div class="form-group">
-      <label for="studentregno">Semester</label>
+    <label>Email Address</label>
+    <input type="email" class="form-control" name="username" placeholder="Email Address" required>
+    <span class="error" style="color:red"> <?php echo $EmailExists; ?></span>
+  </div>
+
+  <div class="form-group">
+      <label for="studentregno">Designation</label>
       <select name="designation" class='form-control'>
         <option value="Faculty">Faculty</option>
         <option value="Staff">Staff</option>

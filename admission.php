@@ -45,7 +45,7 @@ if( isset($_POST["submit"]) )
 }
 
 
-function randomApplicationNumber() 
+function randomApplicationNumber()
 {
     $alphabet = '1234567890';
     $pass = array(); //remember to declare $pass as an array
@@ -119,10 +119,11 @@ function randomApplicationNumber()
             }
         }
         else{
-            echo "<li class='nav-item'>
-              <a class='nav-link' href='admission.php'>Admission</a>
-            </li>
+            echo "
             <li class='nav-item'>
+                  <a class='nav-link' href='ViewAdvertisements.php'>Advertisements</a>
+                </li>
+                <li class='nav-item'>
               <a class='nav-link' href='HomeNoticesDisplay.php'>Notice Board</a>
             </li>";
         }

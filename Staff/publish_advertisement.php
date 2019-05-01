@@ -1,7 +1,11 @@
 <?php
 session_start();
-
 include("includes/config.php");
+
+if(isset($_POST["logout"])){
+  session_unset();
+  header("Location: ./../index.php");
+}
 
 if(!(isset($_SESSION['login']) && $_SESSION['login'] == 1))
 {
@@ -15,7 +19,7 @@ if(isset($_POST["submit"]))
   $Details = $_POST['Details'];
   $Deadline = $_POST['Deadline'];
 
-  $query = mysqli_query($con, "INSERT into Advertisements(header, details, deadline) 
+  $query = mysqli_query($con, "INSERT into Advertisements(header, details, deadline)
   			values('$Header', '$Details', '$Deadline')");
 }
 
@@ -27,42 +31,71 @@ if(isset($_POST["submit"]))
 </head>
 
 <body>
-  <?php include('../top_nav.php'); ?>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./../index.php">Data Science, IIT Guwahati</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mr-auto">
+          </ul>
+          <ul class="navbar-nav">
+            <?php
+                if(isset($_SESSION['login']) && $_SESSION['login'] == 1){
+                    echo "
+                    <li class='nav-item'>
+                      <a class='nav-link'>
+                        Welcome, {$_SESSION['FullName']}
+                      </a>
+                    </li>
+
+
+                    <li class='nav-item'>
+                    <form method = 'post'>
+                        <button type='submit' name='logout' class='nav-link btn btn-light'>Logout</button>
+                        </form>
+                    </li>
+
+                  </ul>
+                    ";
+                }
+            else{
+                echo "
+                <li class='nav-item'>
+                  <a class='nav-link' href='./../signup.php'>
+                    Sign Up
+                  </a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='./../signin.php'>
+                    Sign In
+                  </a>
+                </li>
+              </ul>
+                ";
+            }
+      ?>
+
+        </div>
+      </nav>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="index.php">Home</a>
+          <a class="nav-link" href="./../index.php">Home</a>
         </li>
-        <?php
-        if($_SESSION['Designation'] == 'Student'){
-            echo "
-            <li class='nav-item'>
-              <a class='nav-link' href='ViewEnrolledCourses.php'>Enrolled Courses</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href='DownloadGradeCard.php'>Download Grade Card</a>
-            </li>
-            ";
-        }
-        else if($_SESSION['Designation'] == 'Faculty'){
-            echo "
-            <li class='nav-item'>
-              <a class='nav-link' href='./Faculty/view_course.php'>My Courses</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href='EditCourseGradeCard.php'>Edit Course Grade Card</a>
-            </li>
-            ";
-        }
-        ?>
 
-        <li class="nav-item">
-          <a class="nav-link" href="coursenotice.php">Course Notice</a>
+        <li class='nav-item'>
+          <a class='nav-link' href='./../change_password.php'>Change Password</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="ViewCourseAssignments.php">Course Assignment</a>
+
+        <li class='nav-item'>
+          <a class='nav-link' href='all_applicants.php'>View Applicants</a>
+        </li>
+
+        <li class='nav-item'>
+          <a class='nav-link' href='publish_advertisement.php'>Publish Advertisement</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href='./../HomeNoticeboard.php'>Notice Board</a>
         </li>
 
 
@@ -93,7 +126,7 @@ if(isset($_POST["submit"]))
     <input type="date" class="form-control" name="Deadline" placeholder="Deadline" required>
   </div>
 
- 
+
   <button type="submit" name="submit" class="btn btn-primary">Place Advertisement</button>
 </form>
 

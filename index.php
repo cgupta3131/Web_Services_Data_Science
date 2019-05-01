@@ -64,16 +64,14 @@ session_start();
                   <a class='nav-link' href='./Staff/publish_advertisement.php'>Publish Advertisement</a>
                 </li>
                 <li class='nav-item'>
-                  <a class='nav-link' href='HomeNoticesDisplay.php'>Notice Board</a>
+                  <a class='nav-link' href='HomeNoticeboard.php'>Notice Board</a>
                 </li>
                 ";
             }
         }
         else
         {
-            echo "<li class='nav-item'>
-              <a class='nav-link' href='admission.php'>Admission</a>
-            </li>
+            echo "
 
             <li class='nav-item'>
                   <a class='nav-link' href='ViewAdvertisements.php'>Advertisements</a>

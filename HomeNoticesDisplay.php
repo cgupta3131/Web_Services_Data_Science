@@ -28,9 +28,10 @@
           <a class="nav-link" href="./index.php">Home</a>
         </li>
 
+        
         <li class='nav-item'>
-          <a class='nav-link' href='admission.php'>Admission</a>
-        </li>
+              <a class='nav-link' href='ViewAdvertisements.php'>Advertisements</a>
+            </li>
         <li class='nav-item'>
           <a class='nav-link' href='HomeNoticesDisplay.php'>Notice Board</a>
         </li>

@@ -30,7 +30,7 @@ if(isset($_POST["logout"])){
     ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="./../index.php">Data Science, IIT Guwahati</a>
+        <a class="navbar-brand" href="index.php">Data Science, IIT Guwahati</a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mr-auto">
           </ul>
@@ -57,12 +57,12 @@ if(isset($_POST["logout"])){
             else{
                 echo "
                 <li class='nav-item'>
-                  <a class='nav-link' href='./../signup.php'>
+                  <a class='nav-link' href='signup.php'>
                     Sign Up
                   </a>
                 </li>
                 <li class='nav-item'>
-                  <a class='nav-link' href='./../signin.php'>
+                  <a class='nav-link' href='signin.php'>
                     Sign In
                   </a>
                 </li>
@@ -78,56 +78,16 @@ if(isset($_POST["logout"])){
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="./../index.php">Home</a>
+            <a class="nav-link" href="index.php">Home</a>
           </li>
 
-          <?php
-              if($_SESSION['Designation'] == 'Student'){
-                  echo "
-                  <li class='nav-item'>
-                    <a class='nav-link' href='./../Students/select_course.php'>Apply for course</a>
-                  </li>
-                  <li class='nav-item'>
-                    <a class='nav-link' href='./../ViewEnrolledCourses.php'>Enrolled Courses</a>
-                  </li>
-                  ";
-              }
-          ?>
-
-          <li class="nav-item">
-            <a class="nav-link" href="./../change_password.php">Change Password</a>
-          </li>
-
-          <?php
-              if($_SESSION['Designation'] == 'Faculty'){
-                  echo "
-                  <li class='nav-item'>
-                    <a class='nav-link' href='add_course.php'>Add New Course</a>
-                  </li>
-                  <li class='nav-item'>
-                    <a class='nav-link' href='view_course.php'>My Courses</a>
-                  </li>
-
-                  <li class='nav-item'>
-                    <a class='nav-link' href='request_course.php'>Student Requests</a>
-                  </li>
-                  <li class='nav-item'>
-                    <a class='nav-link' href='students_courses.php'>My Students</a>
-                  </li>
-                  ";
-              }
-          ?>
-
-
-          <?php
-              if($_SESSION['Designation'] == 'Staff'){
-                  echo "
-                  <li class='nav-item'>
-                    <a class='nav-link' href='./../Staff/all_applicants.php'>View Applicants</a>
-                  </li>
-                  ";
-              }
-          ?>
+        
+          <li class='nav-item'>
+                <a class='nav-link' href='ViewAdvertisements.php'>Advertisements</a>
+              </li>
+              <li class='nav-item'>
+                <a class='nav-link' href='HomeNoticesDisplay.php'>Notice Board</a>
+              </li>
 
         </ul>
       </div>

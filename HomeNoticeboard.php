@@ -78,6 +78,9 @@
                   <a class='nav-link' href='./Staff/all_applicants.php'>View Applicants</a>
                 </li>
                 <li class='nav-item'>
+                  <a class='nav-link' href='./Staff/publish_advertisement.php'>Publish Advertisement</a>
+                </li>
+                <li class='nav-item'>
                   <a class='nav-link' href='HomeNoticeboard.php'>Notice Board</a>
                 </li>
                 ";

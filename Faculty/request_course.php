@@ -25,7 +25,7 @@ while($row = mysqli_fetch_array($sql))
 				break;
 			$j += 1;
 			$student_username = $row2['UserName'];
-			$sql = "INSERT INTO EnrolledStudents(CourseID, Username) 
+			$sql = "INSERT INTO EnrolledStudents(CourseID, Username)
 					VALUES ('$courseId','$student_username');";
 
 			$insert_data = mysqli_query($con,$sql);
@@ -78,7 +78,7 @@ while($row = mysqli_fetch_array($sql))
                 }
             else{
                 echo "
-                
+
                 <li class='nav-item'>
                   <a class='nav-link' href='./../signin.php'>
                     Sign In
@@ -191,12 +191,12 @@ while($row = mysqli_fetch_array($sql))
                         <td><?php echo htmlentities($row['last_date']);?></td>
                         <td>
 
-                        
+
 
                         <a href="view_students.php?idCourse=<?php echo $row['course_id']?>">
                         <button class="btn btn-primary"><i class="fa fa-edit "></i>View Students</button> </a>
                       <form method="post">
-                        <button type="submit" name="<?php echo $row['course_id']?>" class="btn btn-default">Register Students</button>
+                        <button type="submit" name="<?php echo $row['course_id']?>" class="btn btn-success">Register Students</button>
                     	</form>
 
                         </td>

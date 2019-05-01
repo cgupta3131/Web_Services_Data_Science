@@ -121,6 +121,9 @@ function randomApplicationNumber()
         else{
             echo "<li class='nav-item'>
               <a class='nav-link' href='admission.php'>Admission</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='HomeNoticesDisplay.php'>Notice Board</a>
             </li>";
         }
         ?>

@@ -63,6 +63,9 @@ session_start();
                 <li class='nav-item'>
                   <a class='nav-link' href='./Staff/publish_advertisement.php'>Publish Advertisement</a>
                 </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='HomeNoticesDisplay.php'>Notice Board</a>
+                </li>
                 ";
             }
         }
@@ -71,11 +74,14 @@ session_start();
             echo "<li class='nav-item'>
               <a class='nav-link' href='admission.php'>Admission</a>
             </li>
-            
+
             <li class='nav-item'>
                   <a class='nav-link' href='ViewAdvertisements.php'>Advertisements</a>
                 </li>
-            ";
+                <li class='nav-item'>
+                  <a class='nav-link' href='HomeNoticesDisplay.php'>Notice Board</a>
+                </li>";
+
         }
         ?>
 

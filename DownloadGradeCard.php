@@ -123,6 +123,37 @@
         <li class="nav-item">
           <a class="nav-link" href="index.php">Home</a>
         </li>
+        <?php
+        if($_SESSION['Designation'] == 'Student'){
+            echo "
+            <li class='nav-item'>
+              <a class='nav-link' href='ViewEnrolledCourses.php'>Enrolled Courses</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='DownloadGradeCard.php'>Download Grade Card</a>
+            </li>
+            ";
+        }
+        else if($_SESSION['Designation'] == 'Faculty'){
+            echo "
+            <li class='nav-item'>
+              <a class='nav-link' href='./Faculty/view_course.php'>My Courses</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='EditCourseGradeCard.php'>Edit Course Grade Card</a>
+            </li>
+            ";
+        }
+        ?>
+
+        <li class="nav-item">
+          <a class="nav-link" href="coursenotice.php">Course Notice</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="ViewCourseAssignments.php">Course Assignment</a>
+        </li>
+
+
       </ul>
     </div>
   </nav>
@@ -193,8 +224,6 @@
                   </div>
               </div>
           </div>
-
-          <button type="submit" name="submit" class="btn btn-primary">Update grades</button>
 
           </form>
 

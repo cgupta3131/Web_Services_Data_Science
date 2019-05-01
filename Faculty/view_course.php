@@ -168,7 +168,7 @@ session_start();
 
                                         <tr>
                                             <td><?php echo $cnt;?></td>
-                                            <td><?php echo htmlentities($row['course_id']);?></td>
+                                            <td><a href='./../CourseHomePage.php?CourseID=<?php echo htmlentities($row['course_id']);?>'><?php echo htmlentities($row['course_id']);?></a></td>
                                             <td><?php echo htmlentities($row['start_semester']);?></td>
                                             <td><?php echo htmlentities($row['course_name']);?></td>
                                             <td><?php echo htmlentities($row['Application_Status']);?></td>

@@ -38,11 +38,6 @@ $_SESSION['CourseID'] = $_GET['idCourse'];
 		{ ?>
 
         <div class="form-group">
-        <label for="studentname">Department</label>
-        <input type="text" class="form-control" id="department" name="department" value="<?php echo htmlentities($row['department']);?>"  readonly="true"/>
-        </div>
-
-        <div class="form-group">
         <label for="studentname">Course Name </label>
         <input type="text" class="form-control" id="course_name" name="course_name" value="<?php echo htmlentities($row['course_name']);?>"  readonly="true"/>
         </div>
@@ -56,6 +51,8 @@ $_SESSION['CourseID'] = $_GET['idCourse'];
         <label for="studentname">About Course </label>
         <input type="text" class="form-control" id="about_course" name="about_course" value="<?php echo htmlentities($row['about_course']);?>"  readonly="true"/>
         </div>
+
+        
 
         <div class="form-group">
         <label for="studentname">Semester </label>

@@ -2,31 +2,60 @@
 include("includes/config.php");
 session_start();
 
+$IDErr = "";
+$NameEmpty = "";
+$AboutEmpty = "";
+
 if( isset($_POST["submit"]) )
 {
   //Remove this line when getting the data
   $_SESSION['username'] = "chirag";
-	$department = $_POST['department'];
 	$course_name = $_POST['course_name'];
 	$course_id = $_POST['course_id'];
 	$about_course = $_POST['about_course'];
 	$start_semester = $_POST['start_semester'];
   $username = $_SESSION['username'];
-  $last_date = $_POST['last_date'];
+  
+  if(empty($course_name))
+    $NameEmpty = "*Course Name is Required";
+  else if(empty($course_id))
+    $IDErr = "*Course ID is Required";
+  else if(strlen($about_course) < 10)
+    $AboutEmpty = "*Minimum 10 characters are required";
 
-	$sql = "INSERT INTO courses(department, course_name, course_id, about_course, start_semester, username,last_date,seats_remaining) VALUES ('$department','$course_name','$course_id','$about_course','$start_semester', '$username', '$last_date','20' );";
+  else
+  {
+      $sql2 = "Select * from courses WHERE `course_id` = '$course_id'";
+      $retrieve_data = mysqli_query($con,$sql2);
 
-	$insert_data = mysqli_query($con,$sql);
+      $i=0;
+      while($row = mysqli_fetch_array($retrieve_data))
+      {
+          $i=1;
+      }
 
-	if($insert_data)
-	{
-		$_SESSION['msg']="Enroll Successfully !!";
-	}
+      if($i == 1)
+      {
+          $IDErr = "*This CourseID already Exists";
+      }
 
-	else
-	{
-  		$_SESSION['msg']="Error : Not Enroll";
-	}
+      else
+      {
+          $sql = "INSERT INTO courses(course_name, course_id, about_course, start_semester, username,seats_remaining) VALUES ('$course_name','$course_id','$about_course','$start_semester', '$username','20' );";
+
+          $insert_data = mysqli_query($con,$sql);
+
+          if($insert_data)
+          {
+            $_SESSION['msg']="Enroll Successfully !!";
+          }
+
+          else
+          {
+              $_SESSION['msg']="Error : Not Enroll";
+          }
+      } 
+  }
 }
 
 ?>
@@ -64,30 +93,25 @@ if( isset($_POST["submit"]) )
     <div class="panel-body">
     <form name="dept" method="post" enctype="multipart/form-data">
 
-    <div class="form-group">
-    	<label for="studentname">Department</label>
-    	<select name="department">
-	  <option value="CSE">CSE</option>
-	  <option value="ECE">ECE</option>
-	  <option value="EE">EE</option>
-	  <option value="MnC">MnC</option>
-	</select>
-  	</div>
-
  	<div class="form-group">
     	<label for="studentregno">Course Name</label>
     	<input type="text" class="form-control" id="course_name" name="course_name"/>
+      <span class="error"><?php echo $NameEmpty; ?></span>
   	</div>
 
   	<div class="form-group">
     	<label for="studentregno">Course ID</label>
     	<input type="text" class="form-control" id="course_id" name="course_id"/>
+      <span class="error"> <?php echo $IDErr; ?></span>
   	</div>
 
-  	<div class="form-group">
-    	<label for="studentregno">About Course</label>
-    	<input type="text" class="form-control" id="about_course" name="about_course"/>
-  	</div>
+  	
+
+    <div class="form-group">
+      <label for="studentregno">About Course</label>
+      ​<textarea id="txtArea" class="form-control" rows="3" cols="70" name="about_course"></textarea>
+      <span class="error"><?php echo $AboutEmpty; ?></span>
+    </div>
 
   	<div class="form-group">
     	<label for="studentregno">Semester</label>
@@ -97,12 +121,7 @@ if( isset($_POST["submit"]) )
 		</select>
   	</div>
 
-    <div class="form-group">
-      <label for="studentregno">Last Date for Application</label>
-      <input type="date" class="form-control" id="last_date" name="last_date"/>
-    </div>
-
-   	<button type="submit" name="submit" id="submit" class="btn btn-default">Add Course</button>
+  	<button type="submit" name="submit" id="submit" class="btn btn-default">Add Course</button>
 
    </form>
    	</div>

@@ -1,13 +1,29 @@
 <?php
   include("config.php");
 
-  if(isset($_POST["submit"])){
-    $username = $_POST['username'];
-    $password = md5($_POST["password"]);
-    $query = mysqli_query($connection, "INSERT into Users(Username, Password) values('$username', '$password')");
+  $PasswordEmpty = "";
+  $ConfirmEmpty = "";
 
-    $host = $_SERVER['HTTP_HOST'];
-    header("Location: http://{$host}Web_Services_Data_Science");
+  if(isset($_POST["submit"]))
+  {
+    $username = $_POST['username'];
+    $unhashed = $_POST["password"];
+    $password = md5($_POST["password"]);
+    $fullname = $_POST['fullname'];
+    $confirmpassword = md5($_POST["confirmpassword"]);
+
+    
+    if(strlen($password) < 6)
+      $PasswordEmpty = "*Passsword must be minimum of 6 characters";
+    else if($password != $confirmpassword)
+      $ConfirmEmpty = "*Both password are not matching";
+    else
+    {
+      $query = mysqli_query($connection, "INSERT into Users(Username, Password, FullName) values('$username', '$password', $fullname)");
+
+      $host = $_SERVER['HTTP_HOST'];
+      header("Location: http://{$host}Web_Services_Data_Science"); 
+    }
   }
 ?>
 
@@ -31,17 +47,29 @@
 
   <form method="post">
   <div class="form-group">
-    <label>Username</label>
-    <input type="text" class="form-control" name="username" placeholder="Username" required>
+    <label>Email Address</label>
+    <input type="email" class="form-control" name="username" placeholder="Email Address" required>
   </div>
+
+  <div class="form-group">
+    <label>Full Name</label>
+    <input type="text" class="form-control" name="fullname" placeholder="Full Name" required>
+  </div>
+
+
   <div class="form-group">
     <label>Password</label>
     <input type="password" class="form-control" name="password" placeholder="Password" required>
+    <span class="error"><?php echo $PasswordEmpty; ?></span>
   </div>
+
+
   <div class="form-group">
     <label>Confirm Password</label>
     <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password" required>
+    <span class="error"><?php echo $ConfirmEmpty; ?></span>
   </div>
+
   <button type="submit" name="submit" class="btn btn-primary">Sign Up</button>
 </form>
 

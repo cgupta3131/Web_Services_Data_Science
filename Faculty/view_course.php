@@ -55,7 +55,6 @@ session_start();
                                     {
                                     ?>
 
-
                                         <tr>
                                             <td><?php echo $cnt;?></td>
                                             <td><?php echo htmlentities($row['course_id']);?></td>
@@ -71,10 +70,16 @@ session_start();
                                             <a href="edit_individual_course.php?idCourse=<?php echo $row['course_id']?>">
                                             <button class="btn btn-danger">Edit</button>    
                                             </a>
-
-                                            <a href="send_application_course.php?idCourse=<?php echo $row['course_id']?>">
-                                            <button type="submit" name="submit" id="submit" class="btn btn-default">Send Applications</button>
-                                            </a>
+                                            
+                                            <?php 
+                                                if($row['Application_Status'] == "Closed")
+                                                { ?> 
+                                                    <a href="send_application_course.php?idCourse=<?php echo $row['course_id']?>">
+                                                    <button type="submit" name="submit" id="submit" class="btn btn-default">Send Applications</button>
+                                                    </a>
+                                                <?php
+                                                } ?>
+                                            
 
 
                                             </td>

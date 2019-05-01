@@ -8,27 +8,27 @@ if(isset($_POST["logout"])){
 }
 
 $username = $_SESSION['Username'];
-
-$sql=mysqli_query($con,"select * from courses WHERE `username` = '$username' AND `Application_Status` = 'Open' OR `Application_Status` = 'Deadline Passed' ");
+$sql = mysqli_query($con," select * from courses WHERE `username` = '$username' AND `Application_Status` = 'Open' OR `Application_Status` = 'Deadline Passed' ");
 
 while($row = mysqli_fetch_array($sql))
 {
 	$courseId = $row['course_id'];
 	if( isset($_POST[$courseId]) )
 	{
-		echo "Chirag";
 		$sql2=mysqli_query($con,"select * from RequestCourse WHERE `courseID` = '$courseId' ORDER BY `gateScore` DESC");
 		$j = 0;
 		while($row2 = mysqli_fetch_array($sql2))
 		{
 			if($j > 20)
 				break;
+
 			$j += 1;
+
 			$student_username = $row2['UserName'];
-			$sql = "INSERT INTO EnrolledStudents(CourseID, Username)
+			$sql3 = "INSERT INTO EnrolledStudents(CourseID, Username)
 					VALUES ('$courseId','$student_username');";
 
-			$insert_data = mysqli_query($con,$sql);
+			$insert_data = mysqli_query($con,$sql3);
 		}
 
 		$sql3 = "UPDATE courses SET `Application_Status` = 'Completed' WHERE `course_id` = '$courseId';";

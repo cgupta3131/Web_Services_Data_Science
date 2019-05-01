@@ -141,7 +141,7 @@ $_SESSION['CourseID'] = $_GET['idCourse'];
                     </tr>
                 </thead>
 
-
+  
                 <tbody>
                 <?php
                 $courseID = $_SESSION['CourseID'];
